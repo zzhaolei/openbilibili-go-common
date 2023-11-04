@@ -3,19 +3,18 @@ package archive
 import (
 	"context"
 	"fmt"
-	xsql "go-common/library/database/sql"
 	"reflect"
 	"testing"
 
-	"github.com/bouk/monkey"
+	xsql "go-common/library/database/sql"
+
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
 func TestStaff(t *testing.T) {
 	convey.Convey("RawStaff", t, func(ctx convey.C) {
-		var (
-			c = context.Background()
-		)
+		c := context.Background()
 		ctx.Convey("When everything gose positive", func(ctx convey.C) {
 			guard := monkey.PatchInstanceMethod(reflect.TypeOf(d.db), "Query", func(_ *xsql.DB, _ context.Context, _ string, _ ...interface{}) (*xsql.Rows, error) {
 				return nil, fmt.Errorf("db.Query error")

@@ -2,16 +2,16 @@ package archive
 
 import (
 	"context"
+	"database/sql"
+	"fmt"
+	"reflect"
 	"testing"
 	"time"
 
-	"database/sql"
-	"fmt"
 	"go-common/app/service/main/videoup/model/archive"
 	xsql "go-common/library/database/sql"
-	"reflect"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	. "github.com/smartystreets/goconvey/convey"
 )
 

@@ -4,13 +4,14 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-	"go-common/app/service/main/videoup/model/archive"
-	xsql "go-common/library/database/sql"
-	"go-common/library/time"
 	"reflect"
 	"testing"
 
-	"github.com/bouk/monkey"
+	"go-common/app/service/main/videoup/model/archive"
+	xsql "go-common/library/database/sql"
+	"go-common/library/time"
+
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
@@ -27,6 +28,7 @@ func TestArchiveArcReport(t *testing.T) {
 		})
 	})
 }
+
 func TestTxAddRelation(t *testing.T) {
 	var (
 		c     = context.Background()
@@ -74,6 +76,7 @@ func TestTxUpForbid(t *testing.T) {
 		})
 	})
 }
+
 func TestTxUpForbidAttr(t *testing.T) {
 	var (
 		c     = context.Background()

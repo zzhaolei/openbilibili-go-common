@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/Shopify/sarama"
+	"github.com/IBM/sarama"
 
 	"go-common/app/service/main/dapper/model"
 	"go-common/app/service/main/dapper/pkg/collect"
@@ -37,7 +37,7 @@ var defaultOption = option{
 	group: "default",
 }
 
-//func NewConsumer(addrs []string, config *Config) (Consumer, error)
+// func NewConsumer(addrs []string, config *Config) (Consumer, error)
 
 // New kafka collect
 func New(topic string, addrs []string, options ...Option) (collect.Collecter, error) {

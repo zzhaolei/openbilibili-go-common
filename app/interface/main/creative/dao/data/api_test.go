@@ -2,13 +2,14 @@ package data
 
 import (
 	"context"
-	"go-common/library/ecode"
-	bm "go-common/library/net/http/blademaster"
 	"net/url"
 	"reflect"
 	"testing"
 
-	"github.com/bouk/monkey"
+	"go-common/library/ecode"
+	bm "go-common/library/net/http/blademaster"
+
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 	gock "gopkg.in/h2non/gock.v1"
 )
@@ -30,7 +31,6 @@ func TestDatastat(t *testing.T) {
 			ctx.So(err, convey.ShouldNotBeNil)
 		})
 	})
-
 }
 
 func TestDataTagsWithChecked(t *testing.T) {

@@ -2,13 +2,14 @@ package subtitle
 
 import (
 	"context"
-	"go-common/app/interface/main/dm2/model"
-	"go-common/app/interface/main/dm2/rpc/client"
-	"go-common/library/ecode"
 	"reflect"
 	"testing"
 
-	"github.com/bouk/monkey"
+	"go-common/app/interface/main/dm2/model"
+	"go-common/app/interface/main/dm2/rpc/client"
+	"go-common/library/ecode"
+
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 

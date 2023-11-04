@@ -2,20 +2,21 @@ package service
 
 import (
 	"fmt"
+
 	rpc "go-common/app/service/bbq/recsys/api/grpc/v1"
 
-	"github.com/go-ego/murmur"
+	"github.com/vcaesar/murmur"
 )
 
 const (
-	//ABTestA ...
+	// ABTestA ...
 	ABTestA = "bbq-rec-A"
 
-	//ABTestB ...
+	// ABTestB ...
 	ABTestB = "bbq-rec-B"
 )
 
-//DoABTest ...
+// DoABTest ...
 func (s *Service) DoABTest(request *rpc.RecsysRequest) {
 	bucket := -1
 	if request.MID > 0 {
@@ -35,7 +36,7 @@ func (s *Service) DoABTest(request *rpc.RecsysRequest) {
 			request.Abtest = ABTestB
 		}
 	}
-	//white list
+	// white list
 	if request.MID == 5829468 {
 		request.Abtest = ABTestA
 	}

@@ -2,19 +2,19 @@ package data
 
 import (
 	"context"
-	"github.com/bouk/monkey"
-	"github.com/tsuna/gohbase/hrpc"
-	"go-common/library/database/hbase.v2"
 	"reflect"
 	"testing"
+
+	"go-common/library/database/hbase.v2"
+
+	"bou.ke/monkey"
+	"github.com/tsuna/gohbase/hrpc"
 
 	"github.com/smartystreets/goconvey/convey"
 )
 
 func TestDatahbaseMd5Key(t *testing.T) {
-	var (
-		aid = int64(0)
-	)
+	aid := int64(0)
 	convey.Convey("hbaseMd5Key", t, func(ctx convey.C) {
 		p1 := hbaseMd5Key(aid)
 		ctx.Convey("Then p1 should not be nil.", func(ctx convey.C) {

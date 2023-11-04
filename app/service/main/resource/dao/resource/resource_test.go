@@ -9,7 +9,7 @@ import (
 
 	xsql "go-common/library/database/sql"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
@@ -127,9 +127,7 @@ func TestResourcePlayerIcon(t *testing.T) {
 }
 
 func TestResourceCmtbox(t *testing.T) {
-	var (
-		c = context.TODO()
-	)
+	c := context.TODO()
 	convey.Convey("Cmtbox", t, func(ctx convey.C) {
 		ctx.Convey("When everything is correct", func(ctx convey.C) {
 			res, err := d.Cmtbox(c)

@@ -2,17 +2,17 @@ package mock
 
 import (
 	"context"
+	"reflect"
+
 	"go-common/app/admin/main/apm/dao"
 	cml "go-common/app/admin/main/apm/model/canal"
 	"go-common/app/admin/main/apm/model/need"
 
-	"go-common/app/admin/main/apm/model/ecode"
+	codes "go-common/app/admin/main/apm/model/ecode"
 	"go-common/app/admin/main/apm/model/pprof"
 	"go-common/app/admin/main/apm/model/ut"
 
-	"reflect"
-
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 )
 
 // MockDaoSetConfigID .

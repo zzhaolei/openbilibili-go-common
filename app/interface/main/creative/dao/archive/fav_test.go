@@ -8,18 +8,14 @@ import (
 
 	"go-common/library/cache/redis"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
-var (
-	errConnClosed = errors.New("redigo: connection closed")
-)
+var errConnClosed = errors.New("redigo: connection closed")
 
 func TestArchivekeyUpFavTpsPrefix(t *testing.T) {
-	var (
-		mid = int64(888952460)
-	)
+	mid := int64(888952460)
 	convey.Convey("keyUpFavTpsPrefix", t, func(ctx convey.C) {
 		p1 := keyUpFavTpsPrefix(mid)
 		ctx.Convey("Then p1 should not be nil.", func(ctx convey.C) {
@@ -47,9 +43,7 @@ func TestArchiveFavTypes(t *testing.T) {
 }
 
 func TestArchivepingRedis(t *testing.T) {
-	var (
-		c = context.TODO()
-	)
+	c := context.TODO()
 	convey.Convey("pingRedis", t, func(ctx convey.C) {
 		err := d.pingRedis(c)
 		ctx.Convey("Then err should be nil.", func(ctx convey.C) {

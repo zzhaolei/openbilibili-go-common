@@ -5,13 +5,13 @@ import (
 	xsql "database/sql"
 	"fmt"
 	"reflect"
+	"testing"
 	"time"
 
 	"go-common/app/job/main/videoup/model/archive"
 	"go-common/library/database/sql"
-	"testing"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	_ "github.com/go-sql-driver/mysql"
 	. "github.com/smartystreets/goconvey/convey"
 )
@@ -28,6 +28,7 @@ func Test_Archive(t *testing.T) {
 		So(sub, ShouldBeNil)
 	}))
 }
+
 func Test_UpperArcStateMap(t *testing.T) {
 	var (
 		c   = context.TODO()
@@ -50,6 +51,7 @@ func Test_UpDelayRound(t *testing.T) {
 		So(err, ShouldBeNil)
 	}))
 }
+
 func TestDao_TxUpState(t *testing.T) {
 	var (
 		c     = context.Background()
@@ -65,6 +67,7 @@ func TestDao_TxUpState(t *testing.T) {
 		So(err, ShouldBeNil)
 	})
 }
+
 func TestDao_TxUpAccess(t *testing.T) {
 	var (
 		c     = context.Background()
@@ -80,6 +83,7 @@ func TestDao_TxUpAccess(t *testing.T) {
 		So(err, ShouldBeNil)
 	})
 }
+
 func TestDao_TxUpRound(t *testing.T) {
 	var (
 		c     = context.Background()
@@ -95,6 +99,7 @@ func TestDao_TxUpRound(t *testing.T) {
 		So(err, ShouldBeNil)
 	})
 }
+
 func TestDao_TxUpAttr(t *testing.T) {
 	var (
 		c     = context.Background()
@@ -110,6 +115,7 @@ func TestDao_TxUpAttr(t *testing.T) {
 		So(err, ShouldBeNil)
 	})
 }
+
 func TestDao_TxUpCover(t *testing.T) {
 	var (
 		c     = context.Background()
@@ -125,15 +131,15 @@ func TestDao_TxUpCover(t *testing.T) {
 		So(err, ShouldBeNil)
 	})
 }
+
 func TestDao_UpCover(t *testing.T) {
-	var (
-		c = context.Background()
-	)
+	c := context.Background()
 	Convey("UpCover", t, func(ctx C) {
 		_, err := d.UpCover(c, 2333, "")
 		So(err, ShouldBeNil)
 	})
 }
+
 func TestDao_TxUpArcDuration(t *testing.T) {
 	var (
 		c     = context.Background()
@@ -149,6 +155,7 @@ func TestDao_TxUpArcDuration(t *testing.T) {
 		So(err, ShouldBeNil)
 	})
 }
+
 func TestDao_TxUpAttrBit(t *testing.T) {
 	var (
 		c     = context.Background()
@@ -164,6 +171,7 @@ func TestDao_TxUpAttrBit(t *testing.T) {
 		So(err, ShouldBeNil)
 	})
 }
+
 func TestDao_TxUpPTime(t *testing.T) {
 	var (
 		c     = context.Background()
@@ -180,6 +188,7 @@ func TestDao_TxUpPTime(t *testing.T) {
 		So(err, ShouldBeNil)
 	})
 }
+
 func Test_ArchiveAddict(t *testing.T) {
 	var (
 		c   = context.TODO()
@@ -256,21 +265,23 @@ func Test_TypeMapping(t *testing.T) {
 	}))
 }
 
-/*func Test_AddRdsCovers(t *testing.T) {
-	var (
-		c   = context.TODO()
-		err error
-		cvs = []*archive.Cover{
-			&archive.Cover{
-				Filename: "sssss",
-			},
-		}
-	)
-	Convey("AddRdsCovers", t, WithDao(func(d *Dao) {
-		_, err = d.AddRdsCovers(c, cvs)
-		So(err, ShouldBeNil)
-	}))
-}*/
+/*
+	func Test_AddRdsCovers(t *testing.T) {
+		var (
+			c   = context.TODO()
+			err error
+			cvs = []*archive.Cover{
+				&archive.Cover{
+					Filename: "sssss",
+				},
+			}
+		)
+		Convey("AddRdsCovers", t, WithDao(func(d *Dao) {
+			_, err = d.AddRdsCovers(c, cvs)
+			So(err, ShouldBeNil)
+		}))
+	}
+*/
 func Test_DBus(t *testing.T) {
 	var (
 		c   = context.TODO()
@@ -281,6 +292,7 @@ func Test_DBus(t *testing.T) {
 		So(err, ShouldBeNil)
 	}))
 }
+
 func Test_UpDBus(t *testing.T) {
 	var (
 		c   = context.TODO()
@@ -302,6 +314,7 @@ func Test_DelAdminDelay(t *testing.T) {
 		So(err, ShouldBeNil)
 	}))
 }
+
 func Test_DelDelayByIds(t *testing.T) {
 	var (
 		c   = context.TODO()
@@ -312,6 +325,7 @@ func Test_DelDelayByIds(t *testing.T) {
 		So(err, ShouldBeNil)
 	}))
 }
+
 func Test_FirstPassCount(t *testing.T) {
 	var (
 		c   = context.TODO()
@@ -455,9 +469,7 @@ func TestDao_TxUpRelationStatus(t *testing.T) {
 }
 
 func TestDao_NewVideos(t *testing.T) {
-	var (
-		c = context.Background()
-	)
+	c := context.Background()
 	Convey("NewVideos", t, func(ctx C) {
 		_, err := d.NewVideos(c, 2333)
 		So(err, ShouldBeNil)
@@ -465,45 +477,39 @@ func TestDao_NewVideos(t *testing.T) {
 }
 
 func TestDao_ValidAidByCid(t *testing.T) {
-	var (
-		c = context.Background()
-	)
+	c := context.Background()
 	Convey("ValidAidByCid", t, func(ctx C) {
 		_, err := d.ValidAidByCid(c, 2333)
 		So(err, ShouldBeNil)
 	})
 }
+
 func TestDao_Stat(t *testing.T) {
-	var (
-		c = context.Background()
-	)
+	c := context.Background()
 	Convey("Stat", t, func(ctx C) {
 		_, err := d.Stat(c, 2333)
 		So(err, ShouldBeNil)
 	})
 }
+
 func TestDao_TypeNaming(t *testing.T) {
-	var (
-		c = context.Background()
-	)
+	c := context.Background()
 	Convey("TypeNaming", t, func(ctx C) {
 		_, err := d.TypeNaming(c)
 		So(err, ShouldBeNil)
 	})
 }
+
 func TestDao_VdoWithArcCntCapable(t *testing.T) {
-	var (
-		c = context.Background()
-	)
+	c := context.Background()
 	Convey("VdoWithArcCntCapable", t, func(ctx C) {
 		_, err := d.VdoWithArcCntCapable(c, 2333)
 		So(err, ShouldBeNil)
 	})
 }
+
 func TestDao_VideoCountCapable(t *testing.T) {
-	var (
-		c = context.Background()
-	)
+	c := context.Background()
 	Convey("VideoCountCapable", t, func(ctx C) {
 		_, err := d.VideoCountCapable(c, 2333)
 		So(err, ShouldBeNil)
@@ -511,9 +517,7 @@ func TestDao_VideoCountCapable(t *testing.T) {
 }
 
 func TestDao_Videos(t *testing.T) {
-	var (
-		c = context.Background()
-	)
+	c := context.Background()
 	Convey("Videos", t, func(ctx C) {
 		_, err := d.Videos(c, 2333)
 		So(err, ShouldBeNil)
@@ -521,14 +525,13 @@ func TestDao_Videos(t *testing.T) {
 }
 
 func TestDao_Video(t *testing.T) {
-	var (
-		c = context.Background()
-	)
+	c := context.Background()
 	Convey("Video", t, func(ctx C) {
 		_, err := d.Video(c, "sssss")
 		So(err, ShouldBeNil)
 	})
 }
+
 func TestDao_TranVideoOper(t *testing.T) {
 	var (
 		c     = context.Background()

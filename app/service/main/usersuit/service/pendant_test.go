@@ -2,10 +2,11 @@ package service
 
 import (
 	"context"
-	"github.com/bouk/monkey"
 	"reflect"
 	"testing"
 	"time"
+
+	"bou.ke/monkey"
 
 	"go-common/app/service/main/usersuit/dao/pendant"
 	"go-common/app/service/main/usersuit/model"
@@ -17,7 +18,7 @@ import (
 func TestNew(t *testing.T) {
 	now := time.Now()
 	t.Logf("%d, %d", now.Unix(), now.UnixNano()/1e6)
-	var x = []string{"A", "B", "C"}
+	x := []string{"A", "B", "C"}
 	for index, value := range x {
 		t.Logf("index is (%+v) ,value is (%+v)", index, value)
 	}
@@ -157,7 +158,6 @@ func TestService_OrderPendant(t *testing.T) {
 		So(err, ShouldNotBeNil)
 		So(res, ShouldBeNil)
 	})
-
 }
 
 func TestService_TakeOffPendant(t *testing.T) {
@@ -179,9 +179,7 @@ func TestService_TakeOffPendant(t *testing.T) {
 }
 
 func TestService_PendantInfo(t *testing.T) {
-	var (
-		pid int64 = 171
-	)
+	var pid int64 = 171
 	Convey("when everything goes well", t, func() {
 		res, err := s.PendantInfo(context.Background(), pid)
 		So(err, ShouldBeNil)
@@ -601,8 +599,8 @@ func TestService_EquipPendant(t *testing.T) {
 		mid       int64 = 111001965
 		vipPid    int64 = 102
 		notVipPid int64 = 98
-		wear      int8  = 2 //1：卸载 2：装备
-		takeOff   int8  = 1 //1：卸载 2：装备
+		wear      int8  = 2 // 1：卸载 2：装备
+		takeOff   int8  = 1 // 1：卸载 2：装备
 	)
 	Convey("test EquipPendant", t, func() {
 		Convey("when everything goes well", func() {
@@ -736,5 +734,4 @@ func TestService_EquipPendant(t *testing.T) {
 			})
 		})
 	})
-
 }

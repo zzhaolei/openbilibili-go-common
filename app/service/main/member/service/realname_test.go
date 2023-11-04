@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 
 	"go-common/app/service/main/member/dao"
 	"go-common/app/service/main/member/model"
@@ -33,7 +33,7 @@ func TestNonage(t *testing.T) {
 
 		birthday, _, err = ParseIdentity(code15)
 		convey.So(err, convey.ShouldBeNil)
-		convey.So(birthday, convey.ShouldResemble, time.Date(1967, time.Month(04), 01, 0, 0, 0, 0, time.Local))
+		convey.So(birthday, convey.ShouldResemble, time.Date(1967, time.Month(0o4), 0o1, 0, 0, 0, 0, time.Local))
 		f, err = isAdult(birthday, time.Now())
 		convey.So(err, convey.ShouldBeNil)
 		convey.So(f, convey.ShouldBeTrue)
@@ -47,21 +47,19 @@ func TestNonage(t *testing.T) {
 			expected bool
 		}
 
-		var (
-			birthdays = []bd{
-				{time.Date(1991, time.Month(10), 12, 0, 0, 0, 0, time.Local), time.Date(2008, time.Month(10), 12, 0, 0, 0, 0, time.Local), false},
-				{time.Date(1991, time.Month(10), 12, 0, 0, 0, 0, time.Local), time.Date(2009, time.Month(9), 30, 0, 0, 0, 0, time.Local), false},
-				{time.Date(1991, time.Month(10), 12, 0, 0, 0, 0, time.Local), time.Date(2009, time.Month(10), 11, 0, 0, 0, 0, time.Local), false},
-				{time.Date(1991, time.Month(10), 12, 0, 0, 0, 0, time.Local), time.Date(2009, time.Month(10), 12, 0, 0, 0, 0, time.Local), true},
-				{time.Date(1991, time.Month(10), 12, 0, 0, 0, 0, time.Local), time.Date(2009, time.Month(11), 1, 0, 0, 0, 0, time.Local), true},
+		birthdays := []bd{
+			{time.Date(1991, time.Month(10), 12, 0, 0, 0, 0, time.Local), time.Date(2008, time.Month(10), 12, 0, 0, 0, 0, time.Local), false},
+			{time.Date(1991, time.Month(10), 12, 0, 0, 0, 0, time.Local), time.Date(2009, time.Month(9), 30, 0, 0, 0, 0, time.Local), false},
+			{time.Date(1991, time.Month(10), 12, 0, 0, 0, 0, time.Local), time.Date(2009, time.Month(10), 11, 0, 0, 0, 0, time.Local), false},
+			{time.Date(1991, time.Month(10), 12, 0, 0, 0, 0, time.Local), time.Date(2009, time.Month(10), 12, 0, 0, 0, 0, time.Local), true},
+			{time.Date(1991, time.Month(10), 12, 0, 0, 0, 0, time.Local), time.Date(2009, time.Month(11), 1, 0, 0, 0, 0, time.Local), true},
 
-				{time.Date(2000, time.Month(01), 01, 0, 0, 0, 0, time.Local), time.Date(2017, time.Month(12), 31, 0, 0, 0, 0, time.Local), false},
-				{time.Date(2000, time.Month(01), 01, 0, 0, 0, 0, time.Local), time.Date(2018, time.Month(01), 01, 0, 0, 0, 0, time.Local), true},
-				{time.Date(2000, time.Month(01), 01, 0, 0, 0, 0, time.Local), time.Date(2018, time.Month(02), 28, 0, 0, 0, 0, time.Local), true},
-				{time.Date(2000, time.Month(01), 01, 0, 0, 0, 0, time.Local), time.Date(2018, time.Month(12), 31, 0, 0, 0, 0, time.Local), true},
-				{time.Date(2000, time.Month(01), 01, 0, 0, 0, 0, time.Local), time.Date(2019, time.Month(01), 01, 0, 0, 0, 0, time.Local), true},
-			}
-		)
+			{time.Date(2000, time.Month(0o1), 0o1, 0, 0, 0, 0, time.Local), time.Date(2017, time.Month(12), 31, 0, 0, 0, 0, time.Local), false},
+			{time.Date(2000, time.Month(0o1), 0o1, 0, 0, 0, 0, time.Local), time.Date(2018, time.Month(0o1), 0o1, 0, 0, 0, 0, time.Local), true},
+			{time.Date(2000, time.Month(0o1), 0o1, 0, 0, 0, 0, time.Local), time.Date(2018, time.Month(0o2), 28, 0, 0, 0, 0, time.Local), true},
+			{time.Date(2000, time.Month(0o1), 0o1, 0, 0, 0, 0, time.Local), time.Date(2018, time.Month(12), 31, 0, 0, 0, 0, time.Local), true},
+			{time.Date(2000, time.Month(0o1), 0o1, 0, 0, 0, 0, time.Local), time.Date(2019, time.Month(0o1), 0o1, 0, 0, 0, 0, time.Local), true},
+		}
 		for _, b := range birthdays {
 			f, err = isAdult(b.day, b.anchor)
 			convey.So(err, convey.ShouldBeNil)

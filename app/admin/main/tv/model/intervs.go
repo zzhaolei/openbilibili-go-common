@@ -2,10 +2,11 @@ package model
 
 import (
 	"encoding/json"
+
 	"go-common/library/time"
 
+	"github.com/go-mysql-org/go-mysql/mysql"
 	"github.com/jinzhu/gorm"
-	"github.com/siddontang/go-mysql/mysql"
 )
 
 // Tv_rank table related const params
@@ -85,8 +86,10 @@ func (c SimpleRank) BeComplete(req *IntervPubReq, title string, position int) (r
 	return
 }
 
-type catName func(int) string                     // translate pgc category to CN name
-type tpParName func(int32) (string, int32, error) // translate ugc type to its parent tid and parent's name
+type (
+	catName   func(int) string                   // translate pgc category to CN name
+	tpParName func(int32) (string, int32, error) // translate ugc type to its parent tid and parent's name
+)
 
 // BeSimpleSn def.
 func (v *Rank) BeSimpleSn(sn *TVEpSeason, translate catName) *SimpleRank {
@@ -115,7 +118,7 @@ func (v *Rank) BeSimpleArc(arc *SimpleArc, translate tpParName) (res *SimpleRank
 	return
 }
 
-//BeError transforms a rank to rankError
+// BeError transforms a rank to rankError
 func (v Rank) BeError() *RankError {
 	return &RankError{
 		ID:       int(v.ID),

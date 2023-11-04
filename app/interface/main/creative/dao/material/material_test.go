@@ -3,11 +3,12 @@ package material
 import (
 	"context"
 	"fmt"
-	xsql "go-common/library/database/sql"
 	"reflect"
 	"testing"
 
-	"github.com/bouk/monkey"
+	xsql "go-common/library/database/sql"
+
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
@@ -26,9 +27,7 @@ func TestFilterCategoryBind(t *testing.T) {
 }
 
 func TestMaterialSubtitles(t *testing.T) {
-	var (
-		c = context.TODO()
-	)
+	c := context.TODO()
 	convey.Convey("Subtitles", t, func(ctx convey.C) {
 		res, err := d.Basic(c)
 		ctx.Convey("Then err should be nil.res should not be nil.", func(ctx convey.C) {
@@ -39,9 +38,7 @@ func TestMaterialSubtitles(t *testing.T) {
 }
 
 func TestMaterialFilters(t *testing.T) {
-	var (
-		c = context.TODO()
-	)
+	c := context.TODO()
 	convey.Convey("Filters", t, func(ctx convey.C) {
 		res, resMap, err := d.Filters(c)
 		ctx.Convey("Then err should be nil.res,resMap should not be nil.", func(ctx convey.C) {
@@ -53,9 +50,7 @@ func TestMaterialFilters(t *testing.T) {
 }
 
 func TestMaterialVstickers(t *testing.T) {
-	var (
-		c = context.TODO()
-	)
+	c := context.TODO()
 	convey.Convey("Vstickers", t, func(ctx convey.C) {
 		guard := monkey.PatchInstanceMethod(reflect.TypeOf(d.db), "Query", func(_ *xsql.DB, _ context.Context, _ string, _ ...interface{}) (*xsql.Rows, error) {
 			return nil, fmt.Errorf("db.Query error")
@@ -71,9 +66,7 @@ func TestMaterialVstickers(t *testing.T) {
 }
 
 func TestCooperates(t *testing.T) {
-	var (
-		c = context.TODO()
-	)
+	c := context.TODO()
 	convey.Convey("Cooperates", t, func(ctx convey.C) {
 		guard := monkey.PatchInstanceMethod(reflect.TypeOf(d.db), "Query", func(_ *xsql.DB, _ context.Context, _ string, _ ...interface{}) (*xsql.Rows, error) {
 			return nil, fmt.Errorf("db.Query error")

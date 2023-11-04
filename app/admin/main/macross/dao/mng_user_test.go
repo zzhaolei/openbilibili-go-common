@@ -8,7 +8,7 @@ import (
 
 	xsql "go-common/library/database/sql"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
@@ -36,7 +36,7 @@ func TestUsers(t *testing.T) {
 
 // Set d.close() to get reversal case
 func TestUser(t *testing.T) {
-	var id = int64(67)
+	id := int64(67)
 	convey.Convey("User", t, func(ctx convey.C) {
 		convey.Convey("When everything is correct,", func(ctx convey.C) {
 			asgs, err := d.User(context.Background(), id)

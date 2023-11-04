@@ -3,25 +3,24 @@ package account
 import (
 	"context"
 	"flag"
-	"go-common/app/interface/main/creative/conf"
-	accapi "go-common/app/service/main/account/api"
-	relaMdl "go-common/app/service/main/relation/model"
-	relation "go-common/app/service/main/relation/rpc/client"
-	"go-common/library/ecode"
 	"os"
 	"reflect"
 	"strings"
 	"testing"
 
-	"github.com/bouk/monkey"
+	"go-common/app/interface/main/creative/conf"
+	accapi "go-common/app/service/main/account/api"
+	relaMdl "go-common/app/service/main/relation/model"
+	relation "go-common/app/service/main/relation/rpc/client"
+	"go-common/library/ecode"
+
+	"bou.ke/monkey"
 	"github.com/golang/mock/gomock"
 	. "github.com/smartystreets/goconvey/convey"
 	gock "gopkg.in/h2non/gock.v1"
 )
 
-var (
-	d *Dao
-)
+var d *Dao
 
 func TestMain(m *testing.M) {
 	if os.Getenv("DEPLOY_ENV") != "" {
@@ -134,6 +133,7 @@ func TestProfile(t *testing.T) {
 		So(p, ShouldBeNil)
 	}))
 }
+
 func TestProfileWithStat(t *testing.T) {
 	Convey("ProfileWithStat", t, WithMock(t, func(mockCtrl *gomock.Controller) {
 		var (
@@ -153,6 +153,7 @@ func TestProfileWithStat(t *testing.T) {
 		So(p, ShouldBeNil)
 	}))
 }
+
 func TestCard(t *testing.T) {
 	Convey("Card", t, WithMock(t, func(mockCtrl *gomock.Controller) {
 		var (
@@ -335,6 +336,7 @@ func TestDao_Relations2(t *testing.T) {
 		})
 	})
 }
+
 func WithMock(t *testing.T, f func(mock *gomock.Controller)) func() {
 	return func() {
 		mockCtrl := gomock.NewController(t)

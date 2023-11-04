@@ -2,19 +2,18 @@ package archive
 
 import (
 	"context"
-	arcmdl "go-common/app/interface/main/creative/model/archive"
-	"go-common/library/cache/memcache"
 	"reflect"
 	"testing"
 
-	"github.com/bouk/monkey"
+	arcmdl "go-common/app/interface/main/creative/model/archive"
+	"go-common/library/cache/memcache"
+
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
 func TestArchivekeyPorder(t *testing.T) {
-	var (
-		aid = int64(10110560)
-	)
+	aid := int64(10110560)
 	convey.Convey("keyPorder", t, func(ctx convey.C) {
 		p1 := keyPorder(aid)
 		ctx.Convey("Then p1 should not be nil.", func(ctx convey.C) {
@@ -24,9 +23,7 @@ func TestArchivekeyPorder(t *testing.T) {
 }
 
 func TestArchivekeyArcCM(t *testing.T) {
-	var (
-		aid = int64(10110560)
-	)
+	aid := int64(10110560)
 	convey.Convey("keyArcCM", t, func(ctx convey.C) {
 		p1 := keyArcCM(aid)
 		ctx.Convey("Then p1 should not be nil.", func(ctx convey.C) {

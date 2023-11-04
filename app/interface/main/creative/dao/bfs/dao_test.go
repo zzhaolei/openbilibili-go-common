@@ -3,15 +3,17 @@ package bfs
 import (
 	"context"
 	"flag"
-	"github.com/bouk/monkey"
-	"github.com/smartystreets/goconvey/convey"
-	"go-common/app/interface/main/creative/conf"
-	"gopkg.in/h2non/gock.v1"
 	"io/ioutil"
 	"net"
 	"os"
 	"strings"
 	"testing"
+
+	"go-common/app/interface/main/creative/conf"
+
+	"bou.ke/monkey"
+	"github.com/smartystreets/goconvey/convey"
+	"gopkg.in/h2non/gock.v1"
 )
 
 var (
@@ -107,9 +109,7 @@ func TestBfsCapture(t *testing.T) {
 
 func TestBfscheckURL(t *testing.T) {
 	convey.Convey("checkURL", t, func(ctx convey.C) {
-		var (
-			url = defaultImg
-		)
+		url := defaultImg
 		ctx.Convey("When everything gose positive", func(ctx convey.C) {
 			err := checkURL(url)
 			ctx.Convey("Then err should be nil.", func(ctx convey.C) {
@@ -121,7 +121,7 @@ func TestBfscheckURL(t *testing.T) {
 
 func TestBfsisPublicIP(t *testing.T) {
 	convey.Convey("isPublicIP", t, func(ctx convey.C) {
-		var IP = net.ParseIP("127.0.0.1")
+		IP := net.ParseIP("127.0.0.1")
 		ctx.Convey("When everything gose positive", func(ctx convey.C) {
 			p1 := isPublicIP(IP)
 			ctx.Convey("Then p1 should not be nil.", func(ctx convey.C) {

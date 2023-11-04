@@ -10,7 +10,7 @@ import (
 	"go-common/app/interface/main/feedback/model"
 	"go-common/library/database/sql"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 

@@ -9,7 +9,7 @@ import (
 	"go-common/app/service/main/point/model"
 	xtime "go-common/library/time"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
@@ -45,9 +45,7 @@ func TestServiceConfig(t *testing.T) {
 
 func TestServiceAllConfig(t *testing.T) {
 	convey.Convey("AllConfig", t, func(ctx convey.C) {
-		var (
-			c = context.Background()
-		)
+		c := context.Background()
 		ctx.Convey("When everything goes positive", func(ctx convey.C) {
 			p1 := s.AllConfig(c)
 			ctx.Convey("Then p1 should not be nil.", func(ctx convey.C) {

@@ -17,14 +17,12 @@ import (
 
 	"go-common/app/interface/main/answer/conf"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 	gock "gopkg.in/h2non/gock.v1"
 )
 
-var (
-	d *Dao
-)
+var d *Dao
 
 func TestMain(m *testing.M) {
 	if os.Getenv("DEPLOY_ENV") != "" {
@@ -207,10 +205,10 @@ func TestDaoValidate(t *testing.T) {
 }
 
 func TestDaoGeeConfig(t *testing.T) {
-	var gtc = &conf.Geetest{PC: conf.GeetestConfig{CaptchaID: "22", PrivateKEY: "123"}, H5: conf.GeetestConfig{CaptchaID: "22", PrivateKEY: "456"}}
+	gtc := &conf.Geetest{PC: conf.GeetestConfig{CaptchaID: "22", PrivateKEY: "123"}, H5: conf.GeetestConfig{CaptchaID: "22", PrivateKEY: "456"}}
 	convey.Convey("GeeConfi", t, func(ctx convey.C) {
 		ctx.Convey("t=pc", func(ctx convey.C) {
-			var t = "pc"
+			t := "pc"
 			gc, geetype := d.GeeConfig(t, gtc)
 			ctx.Convey("gc=gtc.PC,geetype =web", func(ctx convey.C) {
 				ctx.So(gc, convey.ShouldResemble, gtc.PC)
@@ -218,7 +216,7 @@ func TestDaoGeeConfig(t *testing.T) {
 			})
 		})
 		ctx.Convey("t=h5", func(ctx convey.C) {
-			var t = "h5"
+			t := "h5"
 			gc, geetype := d.GeeConfig(t, gtc)
 			ctx.Convey("gc=gtc.H5,geetype =web", func(ctx convey.C) {
 				ctx.So(gc, convey.ShouldResemble, gtc.H5)
@@ -226,7 +224,7 @@ func TestDaoGeeConfig(t *testing.T) {
 			})
 		})
 		ctx.Convey("t=", func(ctx convey.C) {
-			var t = ""
+			t := ""
 			gc, geetype := d.GeeConfig(t, gtc)
 			ctx.Convey("gc=gtc.PC,geetype =web", func(ctx convey.C) {
 				ctx.So(gc, convey.ShouldResemble, gtc.PC)

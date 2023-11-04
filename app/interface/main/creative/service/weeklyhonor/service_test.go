@@ -17,13 +17,11 @@ import (
 	upmdl "go-common/app/service/main/up/model"
 	xtime "go-common/library/time"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
-var (
-	s *Service
-)
+var s *Service
 
 func init() {
 	dir, _ := filepath.Abs("../../cmd/creative.toml")

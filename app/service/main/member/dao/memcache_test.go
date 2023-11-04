@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 
 	"go-common/app/service/main/member/model"
 	"go-common/library/cache/memcache"
@@ -14,9 +14,7 @@ import (
 )
 
 func TestDaoexpKey(t *testing.T) {
-	var (
-		mid = int64(111001740)
-	)
+	mid := int64(111001740)
 	convey.Convey("expKey", t, func(ctx convey.C) {
 		p1 := expKey(mid)
 		ctx.Convey("p1 should not be nil", func(ctx convey.C) {
@@ -26,9 +24,7 @@ func TestDaoexpKey(t *testing.T) {
 }
 
 func TestDaomoralKey(t *testing.T) {
-	var (
-		mid = int64(111001740)
-	)
+	mid := int64(111001740)
 	convey.Convey("moralKey", t, func(ctx convey.C) {
 		p1 := moralKey(mid)
 		ctx.Convey("p1 should not be nil", func(ctx convey.C) {
@@ -38,9 +34,7 @@ func TestDaomoralKey(t *testing.T) {
 }
 
 func TestDaopingMC(t *testing.T) {
-	var (
-		c = context.Background()
-	)
+	c := context.Background()
 	convey.Convey("pingMC", t, func(ctx convey.C) {
 		err := d.pingMC(c)
 		ctx.Convey("Error should be nil", func(ctx convey.C) {
@@ -82,7 +76,8 @@ func TestDaoBaseInfoCache(t *testing.T) {
 		})
 		ctx.Convey("When conn.Get gets error", func(ctx convey.C) {
 			guard := monkey.PatchInstanceMethod(reflect.TypeOf(d.mc), "Get", func(_ *memcache.Pool,
-				_ context.Context) memcache.Conn {
+				_ context.Context,
+			) memcache.Conn {
 				return memcache.MockWith(memcache.ErrItemObject)
 			})
 			defer guard.Unpatch()
@@ -242,9 +237,7 @@ func TestDaoDelMoralCache(t *testing.T) {
 }
 
 func TestDaorealnameInfoKey(t *testing.T) {
-	var (
-		mid = int64(19476037)
-	)
+	mid := int64(19476037)
 	convey.Convey("realnameApplyKey", t, func(ctx convey.C) {
 		key := realnameInfoKey(mid)
 		ctx.Convey("p1 should equal realname_info_<mid>", func(ctx convey.C) {
@@ -254,9 +247,7 @@ func TestDaorealnameInfoKey(t *testing.T) {
 }
 
 func TestDaorealnameCaptureTimesKey(t *testing.T) {
-	var (
-		mid = int64(19476037)
-	)
+	mid := int64(19476037)
 	convey.Convey("realnameCaptureTimesKey", t, func(ctx convey.C) {
 		p1 := realnameCaptureTimesKey(mid)
 		ctx.Convey("p1 should not be nil", func(ctx convey.C) {
@@ -266,9 +257,7 @@ func TestDaorealnameCaptureTimesKey(t *testing.T) {
 }
 
 func TestDaorealnameCaptureCodeKey(t *testing.T) {
-	var (
-		mid = int64(19476037)
-	)
+	mid := int64(19476037)
 	convey.Convey("realnameCaptureCodeKey", t, func(ctx convey.C) {
 		p1 := realnameCaptureCodeKey(mid)
 		ctx.Convey("p1 should not be nil", func(ctx convey.C) {
@@ -278,9 +267,7 @@ func TestDaorealnameCaptureCodeKey(t *testing.T) {
 }
 
 func TestDaorealnameCaptureErrTimesKey(t *testing.T) {
-	var (
-		mid = int64(19476037)
-	)
+	mid := int64(19476037)
 	convey.Convey("realnameCaptureErrTimesKey", t, func(ctx convey.C) {
 		p1 := realnameCaptureErrTimesKey(mid)
 		ctx.Convey("p1 should not be nil", func(ctx convey.C) {

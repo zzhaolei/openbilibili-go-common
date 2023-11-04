@@ -9,7 +9,7 @@ import (
 	"go-common/app/job/main/passport/model"
 	"go-common/library/database/hbase.v2"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 	"github.com/tsuna/gohbase/hrpc"
 )

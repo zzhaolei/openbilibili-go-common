@@ -2,14 +2,15 @@ package dao
 
 import (
 	"context"
-	"go-common/app/job/main/passport/model"
-	"go-common/library/ecode"
-	bm "go-common/library/net/http/blademaster"
 	"net/url"
 	"reflect"
 	"testing"
 
-	"github.com/bouk/monkey"
+	"go-common/app/job/main/passport/model"
+	"go-common/library/ecode"
+	bm "go-common/library/net/http/blademaster"
+
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
@@ -61,5 +62,4 @@ func TestDao_NotifyGame(t *testing.T) {
 			})
 		})
 	})
-
 }

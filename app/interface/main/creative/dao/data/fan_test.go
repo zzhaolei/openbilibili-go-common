@@ -3,14 +3,15 @@ package data
 import (
 	"context"
 	"encoding/binary"
-	"go-common/app/interface/main/creative/model/data"
-	"go-common/library/ecode"
 	"reflect"
 	"testing"
 
+	"go-common/app/interface/main/creative/model/data"
+	"go-common/library/ecode"
+
 	hbase "go-common/library/database/hbase.v2"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 	"github.com/tsuna/gohbase/hrpc"
 )

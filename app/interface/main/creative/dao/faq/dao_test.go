@@ -5,16 +5,17 @@ import (
 	"encoding/json"
 	"errors"
 	"flag"
-	"go-common/app/interface/main/creative/conf"
-	"go-common/app/interface/main/creative/model/faq"
-	"go-common/library/cache/redis"
-	"go-common/library/ecode"
 	"os"
 	"reflect"
 	"strings"
 	"testing"
 
-	"github.com/bouk/monkey"
+	"go-common/app/interface/main/creative/conf"
+	"go-common/app/interface/main/creative/model/faq"
+	"go-common/library/cache/redis"
+	"go-common/library/ecode"
+
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 	gock "gopkg.in/h2non/gock.v1"
 )
@@ -46,6 +47,7 @@ func TestMain(m *testing.M) {
 	m.Run()
 	os.Exit(0)
 }
+
 func httpMock(method, url string) *gock.Request {
 	r := gock.New(url)
 	r.Method = strings.ToUpper(method)

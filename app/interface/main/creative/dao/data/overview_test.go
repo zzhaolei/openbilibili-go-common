@@ -8,10 +8,11 @@ import (
 
 	"go-common/library/ecode"
 
-	"github.com/bouk/monkey"
+	hbase "go-common/library/database/hbase.v2"
+
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 	"github.com/tsuna/gohbase/hrpc"
-	hbase "go-common/library/database/hbase.v2"
 )
 
 func TestDataViewerBase(t *testing.T) {

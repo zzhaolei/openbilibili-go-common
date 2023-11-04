@@ -6,7 +6,7 @@ import (
 
 	"go-common/app/admin/main/apm/model/need"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/jinzhu/gorm"
 	"github.com/smartystreets/goconvey/convey"
 )

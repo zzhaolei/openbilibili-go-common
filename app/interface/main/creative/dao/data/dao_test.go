@@ -3,22 +3,21 @@ package data
 import (
 	"context"
 	"flag"
-	"go-common/app/interface/main/creative/conf"
-	"go-common/library/cache/memcache"
-	"go-common/library/log"
 	"os"
 	"reflect"
 	"strings"
 	"testing"
 
-	"github.com/bouk/monkey"
+	"go-common/app/interface/main/creative/conf"
+	"go-common/library/cache/memcache"
+	"go-common/library/log"
+
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 	gock "gopkg.in/h2non/gock.v1"
 )
 
-var (
-	d *Dao
-)
+var d *Dao
 
 func TestMain(m *testing.M) {
 	if os.Getenv("DEPLOY_ENV") != "" {
@@ -50,6 +49,7 @@ func httpMock(method, url string) *gock.Request {
 	d.statClient.SetTransport(gock.DefaultTransport)
 	return r
 }
+
 func TestStat(t *testing.T) {
 	var (
 		c   = context.TODO()

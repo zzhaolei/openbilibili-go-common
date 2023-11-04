@@ -11,10 +11,10 @@ import (
 	"go-common/library/log"
 	bm "go-common/library/net/http/blademaster"
 
-	"github.com/siddontang/go-mysql/mysql"
+	"github.com/go-mysql-org/go-mysql/mysql"
 )
 
-//VideoList is used for getting PGC video from DB
+// VideoList is used for getting PGC video from DB
 func (s *Service) VideoList(c *bm.Context, param *model.VideoListParam) (pager *model.VideoListPager, err error) {
 	var (
 		order  string
@@ -32,7 +32,7 @@ func (s *Service) VideoList(c *bm.Context, param *model.VideoListParam) (pager *
 		"ugc_archive.title",
 		"ugc_archive.typeid",
 	}
-	//只筛选出未删除 且审核过的视频
+	// 只筛选出未删除 且审核过的视频
 	w := map[string]interface{}{"deleted": 0, "result": 1}
 	db := s.DB.Model(&model.VideoListQuery{}).Where(w)
 	db = db.Select(selectStr).
@@ -65,7 +65,7 @@ func (s *Service) VideoList(c *bm.Context, param *model.VideoListParam) (pager *
 	if err = db.Count(&total).Error; err != nil {
 		return
 	}
-	//get parent id
+	// get parent id
 	for k, v := range videos {
 		videos[k].PTypeID = s.GetArchivePid(v.TypeID)
 	}
@@ -80,7 +80,7 @@ func (s *Service) VideoList(c *bm.Context, param *model.VideoListParam) (pager *
 	return
 }
 
-//VideoOnline is used for online PGC video
+// VideoOnline is used for online PGC video
 func (s *Service) VideoOnline(ids []int64) (err error) {
 	w := map[string]interface{}{"deleted": 0, "result": 1}
 	tx := s.DB.Begin()
@@ -102,7 +102,7 @@ func (s *Service) VideoOnline(ids []int64) (err error) {
 	return
 }
 
-//VideoHidden is used for hidden UGC video
+// VideoHidden is used for hidden UGC video
 func (s *Service) VideoHidden(ids []int64) (err error) {
 	w := map[string]interface{}{"deleted": 0, "result": 1}
 	tx := s.DB.Begin()
@@ -124,7 +124,7 @@ func (s *Service) VideoHidden(ids []int64) (err error) {
 	return
 }
 
-//VideoUpdate is used for hidden UGC video
+// VideoUpdate is used for hidden UGC video
 func (s *Service) VideoUpdate(id int, title string) (err error) {
 	w := map[string]interface{}{"id": id}
 	if err = s.DB.Model(&model.Video{}).Where(w).Update("eptitle", title).Error; err != nil {
@@ -134,7 +134,7 @@ func (s *Service) VideoUpdate(id int, title string) (err error) {
 }
 
 func (s *Service) getArc(aid int64) (res *model.Archive, err error) {
-	var data = model.Archive{}
+	data := model.Archive{}
 	if err = s.DB.Where("aid = ?", aid).Where("deleted =0").First(&data).Error; err != nil {
 		log.Error("getArc Aid %d, Err %v", aid, err)
 		return
@@ -196,7 +196,7 @@ func (s *Service) AbnDebug() (data []*model.AbnorCids) {
 
 // AbnormExport exports the abnormal cids in CSV format
 func (s *Service) AbnormExport() (data *bytes.Buffer, fileName string) {
-	var cfg = s.c.Cfg.Abnormal
+	cfg := s.c.Cfg.Abnormal
 	data = &bytes.Buffer{}
 	csvWriter := csv.NewWriter(data)
 	fileName = fmt.Sprintf("attachment;filename=\"Abnormal_%dh_%s.csv\"", cfg.AbnormHours, time.Now().Format(mysql.TimeFormat))

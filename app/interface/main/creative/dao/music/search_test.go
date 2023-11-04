@@ -2,13 +2,14 @@ package music
 
 import (
 	"context"
-	"go-common/app/interface/main/creative/model/search"
-	"go-common/library/database/elastic"
-	"go-common/library/ecode"
 	"reflect"
 	"testing"
 
-	"github.com/bouk/monkey"
+	"go-common/app/interface/main/creative/model/search"
+	"go-common/library/database/elastic"
+	"go-common/library/ecode"
+
+	"bou.ke/monkey"
 
 	"github.com/smartystreets/goconvey/convey"
 )

@@ -7,7 +7,7 @@ import (
 	"io"
 	"testing"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
@@ -24,9 +24,7 @@ func TestDrawimgString(t *testing.T) {
 
 func TestDrawimgOpen(t *testing.T) {
 	convey.Convey("Open", t, func(ctx convey.C) {
-		var (
-			filename = ""
-		)
+		filename := ""
 		ctx.Convey("When everything gose positive", func(ctx convey.C) {
 			p1, err := Open(filename)
 			ctx.Convey("Then err should be nil.p1 should not be nil.", func(ctx convey.C) {
@@ -108,9 +106,7 @@ func TestDrawimgClone(t *testing.T) {
 
 func TestDrawimgtoNRGBA(t *testing.T) {
 	convey.Convey("toNRGBA", t, func(ctx convey.C) {
-		var (
-			img = image.NewRGBA64(imgRectangle)
-		)
+		img := image.NewRGBA64(imgRectangle)
 		ctx.Convey("When everything gose positive", func(ctx convey.C) {
 			p1 := toNRGBA(img)
 			ctx.Convey("Then p1 should not be nil.", func(ctx convey.C) {
@@ -215,9 +211,7 @@ func TestDrawimgAdjustBrightness(t *testing.T) {
 
 func TestDrawimgGrayscale(t *testing.T) {
 	convey.Convey("Grayscale", t, func(ctx convey.C) {
-		var (
-			img = image.NewRGBA64(imgRectangle)
-		)
+		img := image.NewRGBA64(imgRectangle)
 		ctx.Convey("When everything gose positive", func(ctx convey.C) {
 			p1 := Grayscale(img)
 			ctx.Convey("Then p1 should not be nil.", func(ctx convey.C) {
@@ -229,9 +223,7 @@ func TestDrawimgGrayscale(t *testing.T) {
 
 func TestDrawimgInvert(t *testing.T) {
 	convey.Convey("Invert", t, func(ctx convey.C) {
-		var (
-			img = image.NewRGBA64(imgRectangle)
-		)
+		img := image.NewRGBA64(imgRectangle)
 		ctx.Convey("When everything gose positive", func(ctx convey.C) {
 			p1 := Invert(img)
 			ctx.Convey("Then p1 should not be nil.", func(ctx convey.C) {
@@ -257,9 +249,7 @@ func TestDrawimgparallel(t *testing.T) {
 
 func TestDrawimgabsint(t *testing.T) {
 	convey.Convey("absint", t, func(ctx convey.C) {
-		var (
-			i = int(0)
-		)
+		i := int(0)
 		ctx.Convey("When everything gose positive", func(ctx convey.C) {
 			p1 := absint(i)
 			ctx.Convey("Then p1 should not be nil.", func(ctx convey.C) {
@@ -271,9 +261,7 @@ func TestDrawimgabsint(t *testing.T) {
 
 func TestDrawimgclamp(t *testing.T) {
 	convey.Convey("clamp", t, func(ctx convey.C) {
-		var (
-			x = float64(0)
-		)
+		x := float64(0)
 		ctx.Convey("When everything gose positive", func(ctx convey.C) {
 			p1 := clamp(x)
 			ctx.Convey("Then p1 should not be nil.", func(ctx convey.C) {

@@ -12,11 +12,11 @@ import (
 	"go-common/app/service/main/vip/model"
 	"go-common/library/ecode"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	. "github.com/smartystreets/goconvey/convey"
 )
 
-//  go test  -test.v -test.run TestServiceCreateOrder2
+// go test  -test.v -test.run TestServiceCreateOrder2
 func TestServiceCreateOrder2(t *testing.T) {
 	Convey("TestServiceCreateOrder2 ", t, func() {
 		arg := &model.ArgCreateOrder2{
@@ -54,7 +54,7 @@ func TestServiceCreateOrder2(t *testing.T) {
 	})
 }
 
-//  go test  -test.v -test.run TestServiceCreateQrCodeOrder
+// go test  -test.v -test.run TestServiceCreateQrCodeOrder
 func TestServiceCreateQrCodeOrder(t *testing.T) {
 	Convey("TestServiceCreateQrCodeOrder ", t, func() {
 		arg := &model.ArgCreateOrder2{
@@ -73,7 +73,7 @@ func TestServiceCreateQrCodeOrder(t *testing.T) {
 	})
 }
 
-//  go test  -test.v -test.run TestServiceOrderID
+// go test  -test.v -test.run TestServiceOrderID
 func TestServiceOrderID(t *testing.T) {
 	Convey("TestServiceOrderID ", t, func() {
 		// ios
@@ -83,7 +83,7 @@ func TestServiceOrderID(t *testing.T) {
 	})
 }
 
-//  go test  -test.v -test.run TestSignPayPlatform
+// go test  -test.v -test.run TestSignPayPlatform
 func TestSignPayPlatform(t *testing.T) {
 	Convey("TestSignPayPlatform ", t, func() {
 		pp := make(map[string]interface{})

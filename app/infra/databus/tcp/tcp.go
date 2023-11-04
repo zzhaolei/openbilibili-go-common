@@ -14,7 +14,7 @@ import (
 	"go-common/app/infra/databus/service"
 	"go-common/library/log"
 
-	"github.com/Shopify/sarama"
+	"github.com/IBM/sarama"
 	metrics "github.com/rcrowley/go-metrics"
 )
 

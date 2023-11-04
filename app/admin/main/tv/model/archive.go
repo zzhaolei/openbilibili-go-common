@@ -3,7 +3,7 @@ package model
 import (
 	"go-common/library/time"
 
-	"github.com/siddontang/go-mysql/mysql"
+	"github.com/go-mysql-org/go-mysql/mysql"
 )
 
 // SimpleArc is the simple struct of archive

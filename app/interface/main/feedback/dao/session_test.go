@@ -11,7 +11,7 @@ import (
 	"go-common/app/interface/main/feedback/model"
 	"go-common/library/database/sql"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
@@ -505,9 +505,7 @@ func TestDaoTagIDBySid(t *testing.T) {
 
 func TestDaoplatConvert(t *testing.T) {
 	convey.Convey("platConvert", t, func(ctx convey.C) {
-		var (
-			platform = "a,b"
-		)
+		platform := "a,b"
 		ctx.Convey("When the original string is 'a,b'", func(ctx convey.C) {
 			s := platConvert(platform)
 			ctx.Convey("Then s should equal \"a\",\"b\".", func(ctx convey.C) {

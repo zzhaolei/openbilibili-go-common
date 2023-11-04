@@ -2,9 +2,10 @@ package upcrmmodel
 
 import (
 	"fmt"
+
 	"go-common/library/time"
 
-	"github.com/siddontang/go-mysql/mysql"
+	"github.com/go-mysql-org/go-mysql/mysql"
 )
 
 var (
@@ -16,7 +17,7 @@ var (
 	TimeFmtDateTime = "2006-01-02 15:04:05"
 )
 
-//UpScoreHistory  struct
+// UpScoreHistory  struct
 type UpScoreHistory struct {
 	ID           uint32    `gorm:"column:id"`
 	Mid          int64     `gorm:"column:mid"`
@@ -27,12 +28,12 @@ type UpScoreHistory struct {
 	MTime        time.Time `gorm:"column:mtime"`
 }
 
-//TableName table name
+// TableName table name
 func (u *UpScoreHistory) TableName() string {
 	return GetUpScoreHistoryTableName(u.Mid)
 }
 
-//GetUpScoreHistoryTableName table name
+// GetUpScoreHistoryTableName table name
 func GetUpScoreHistoryTableName(mid int64) string {
 	return fmt.Sprintf("up_scores_history_%02d", mid%100)
 }

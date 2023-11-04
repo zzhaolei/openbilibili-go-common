@@ -12,14 +12,13 @@ import (
 	"go-common/app/job/main/passport/conf"
 	"go-common/library/database/sql"
 
-	"github.com/bouk/monkey"
-	"github.com/smartystreets/goconvey/convey"
 	"go-common/library/database/hbase.v2"
+
+	"bou.ke/monkey"
+	"github.com/smartystreets/goconvey/convey"
 )
 
-var (
-	d *Dao
-)
+var d *Dao
 
 func TestMain(m *testing.M) {
 	if os.Getenv("DEPLOY_ENV") != "" {
@@ -51,7 +50,7 @@ func InetAtoN(ip string) int64 {
 }
 
 func TestDaoPing(t *testing.T) {
-	var c = context.Background()
+	c := context.Background()
 	convey.Convey("Ping", t, func(ctx convey.C) {
 		err := d.Ping(c)
 		ctx.Convey("Then err should be nil.", func(ctx convey.C) {

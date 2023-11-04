@@ -3,21 +3,20 @@ package resource
 import (
 	"context"
 	"flag"
-	"go-common/app/interface/main/creative/conf"
-	"go-common/app/service/main/resource/model"
-	"go-common/app/service/main/resource/rpc/client"
-	"go-common/library/ecode"
 	"os"
 	"reflect"
 	"testing"
 
-	"github.com/bouk/monkey"
+	"go-common/app/interface/main/creative/conf"
+	"go-common/app/service/main/resource/model"
+	"go-common/app/service/main/resource/rpc/client"
+	"go-common/library/ecode"
+
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
-var (
-	d *Dao
-)
+var d *Dao
 
 func TestMain(m *testing.M) {
 	if os.Getenv("DEPLOY_ENV") != "" {

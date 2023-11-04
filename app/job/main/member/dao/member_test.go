@@ -4,7 +4,6 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-
 	"reflect"
 	"testing"
 	"time"
@@ -12,7 +11,7 @@ import (
 	"go-common/app/job/main/member/model"
 	xsql "go-common/library/database/sql"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	. "github.com/smartystreets/goconvey/convey"
 )
 
@@ -193,7 +192,6 @@ func TestDao_BaseInfo(t *testing.T) {
 			So(r, ShouldBeNil)
 		})
 	})
-
 }
 
 // TestDao_RecoverMoral  update

@@ -11,13 +11,11 @@ import (
 	"go-common/library/ecode"
 	"go-common/library/log"
 
-	"github.com/Shopify/sarama"
+	"github.com/IBM/sarama"
 	scluster "github.com/bsm/sarama-cluster"
 )
 
-var (
-	commitInterval = 20 * time.Millisecond
-)
+var commitInterval = 20 * time.Millisecond
 
 // Client kafka client
 type Client struct {
@@ -70,9 +68,7 @@ func (c *Client) Partitions() []int32 {
 
 // OffsetNew return newest offset for given topic
 func (c *Client) OffsetNew() (info map[int32]int64, err error) {
-	var (
-		offset int64
-	)
+	var offset int64
 	ps, err := c.Client.Partitions(c.topic)
 	if err != nil {
 		return
@@ -90,9 +86,7 @@ func (c *Client) OffsetNew() (info map[int32]int64, err error) {
 
 // OffsetOld return newest oldset for given topic
 func (c *Client) OffsetOld() (info map[int32]int64, err error) {
-	var (
-		offset int64
-	)
+	var offset int64
 	ps, err := c.Client.Partitions(c.topic)
 	if err != nil {
 		return

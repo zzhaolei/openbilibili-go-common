@@ -6,9 +6,9 @@ import (
 	"testing"
 
 	relaMdl "go-common/app/service/main/relation/model"
-	"go-common/app/service/main/relation/rpc/client"
+	relation "go-common/app/service/main/relation/rpc/client"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	. "github.com/smartystreets/goconvey/convey"
 
 	accapi "go-common/app/service/main/account/api"

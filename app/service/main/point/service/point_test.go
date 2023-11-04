@@ -9,7 +9,7 @@ import (
 	"go-common/app/service/main/point/model"
 	xsql "go-common/library/database/sql"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 

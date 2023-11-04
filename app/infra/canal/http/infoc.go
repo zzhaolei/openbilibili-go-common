@@ -15,7 +15,7 @@ import (
 	bm "go-common/library/net/http/blademaster"
 
 	"github.com/BurntSushi/toml"
-	"github.com/siddontang/go-mysql/canal"
+	"github.com/go-mysql-org/go-mysql/canal"
 )
 
 const (
@@ -101,7 +101,7 @@ func infocPost(c *bm.Context) {
 				ReadTimeout:     _readTimeout,
 			},
 		}
-		var isc = &struct {
+		isc := &struct {
 			InsConf *conf.InsConf `toml:"instance"`
 		}{
 			InsConf: ic,

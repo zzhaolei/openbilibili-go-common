@@ -2,19 +2,18 @@ package account
 
 import (
 	"context"
-	"go-common/library/cache/memcache"
 	"reflect"
 	"testing"
 
-	"github.com/bouk/monkey"
+	"go-common/library/cache/memcache"
+
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
 func TestAccountlimitMidHafMin(t *testing.T) {
 	convey.Convey("limitMidHafMin", t, func(ctx convey.C) {
-		var (
-			mid = int64(2089809)
-		)
+		mid := int64(2089809)
 		ctx.Convey("When everything goes positive", func(ctx convey.C) {
 			p1 := limitMidHafMin(mid)
 			ctx.Convey("Then p1 should not be nil.", func(ctx convey.C) {

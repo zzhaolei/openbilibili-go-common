@@ -4,16 +4,19 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
-	test "go-common/library/cache/memcache/test"
 	"testing"
 	"time"
 
-	"github.com/bouk/monkey"
+	test "go-common/library/cache/memcache/test"
+
+	"bou.ke/monkey"
 	"github.com/gogo/protobuf/proto"
 )
 
-var s = []string{"test", "test1"}
-var c Conn
+var (
+	s = []string{"test", "test1"}
+	c Conn
+)
 
 var item = &Item{
 	Key:        "test",
@@ -96,7 +99,7 @@ func TestAdd(t *testing.T) {
 
 func TestSetErr(t *testing.T) {
 	prepareEnv(t)
-	//set
+	// set
 	st := &TestItem{Name: "jsongzip", Age: 10}
 	itemx := &Item{Key: "jsongzip", Object: st}
 	if err := c.Set(itemx); err != ErrItem {
@@ -106,7 +109,7 @@ func TestSetErr(t *testing.T) {
 
 func TestSetErr2(t *testing.T) {
 	prepareEnv(t)
-	//set
+	// set
 	itemx := &Item{Key: "jsongzip", Flags: FlagJSON | FlagGzip}
 	if err := c.Set(itemx); err != ErrItem {
 		t.Errorf("conn.Set() error(%v)", err)
@@ -115,7 +118,7 @@ func TestSetErr2(t *testing.T) {
 
 func TestSetErr3(t *testing.T) {
 	prepareEnv(t)
-	//set
+	// set
 	itemx := &Item{Key: "jsongzip", Value: []byte("test"), Flags: FlagJSON}
 	if err := c.Set(itemx); err != ErrItem {
 		t.Errorf("conn.Set() error(%v)", err)
@@ -124,7 +127,7 @@ func TestSetErr3(t *testing.T) {
 
 func TestJSONGzip(t *testing.T) {
 	prepareEnv(t)
-	//set
+	// set
 	st := &TestItem{Name: "jsongzip", Age: 10}
 	itemx := &Item{Key: "jsongzip", Object: st, Flags: FlagJSON | FlagGzip}
 	if err := c.Set(itemx); err != nil {
@@ -349,7 +352,7 @@ func TestGetMulti(t *testing.T) {
 
 func TestGetMulti2(t *testing.T) {
 	prepareEnv(t)
-	//set
+	// set
 	if err := c.Set(item); err != nil {
 		t.Errorf("conn.Set() error(%v)", err)
 	}
@@ -407,7 +410,7 @@ func TestCompareAndSwap(t *testing.T) {
 	if err := c.Set(item3); err != nil {
 		t.Errorf("conn.Set() error(%v)", err)
 	}
-	//cas
+	// cas
 	if r, err := c.Get("test2"); err != nil {
 		t.Errorf("conn.Get() error(%v)", err)
 	} else {

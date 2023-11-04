@@ -9,22 +9,20 @@ import (
 	usmdl "go-common/app/service/main/usersuit/model"
 	usrpc "go-common/app/service/main/usersuit/rpc/client"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	. "github.com/smartystreets/goconvey/convey"
 )
 
 func TestService_Equip(t *testing.T) {
 	// 1）背包里只要存在挂件，且来源是背包（不论挂件是否为大会员的）都能佩戴 2）背包里不存在挂件，但来源是大会员挂件，也可以佩戴，反之报错，用例如下：
 	Convey("Equip interface", t, func() {
-		var (
-			c = context.Background()
-		)
+		c := context.Background()
 		// 穿戴一个非vip挂件，但是挂件来源是vip，报错
 		Convey(" wear vip pendant", t, func() {
-			var ArgEquip = &usmdl.ArgEquip{
+			ArgEquip := &usmdl.ArgEquip{
 				Mid:    111001965,
 				Pid:    98,
-				Status: 2, //1 卸载  2 佩戴
+				Status: 2, // 1 卸载  2 佩戴
 				Source: 2, // 0 未知  1背包  2 vip
 			}
 			guard := monkey.PatchInstanceMethod(reflect.TypeOf(s.usRPC), "Equip", func(_ *usrpc.Service2, _ context.Context, _ *usmdl.ArgEquip) error {
@@ -39,10 +37,10 @@ func TestService_Equip(t *testing.T) {
 
 		// 穿戴一个vip挂件，但是挂件来源是背包(前提：背包里存在该挂件),正确
 		Convey(" wear vip pendant", t, func() {
-			var ArgEquip = &usmdl.ArgEquip{
+			ArgEquip := &usmdl.ArgEquip{
 				Mid:    111001965,
 				Pid:    102,
-				Status: 2, //1 卸载  2 佩戴
+				Status: 2, // 1 卸载  2 佩戴
 				Source: 1, // 0 未知  1背包  2 vip
 			}
 			guard := monkey.PatchInstanceMethod(reflect.TypeOf(s.usRPC), "Equip", func(_ *usrpc.Service2, _ context.Context, _ *usmdl.ArgEquip) error {
@@ -57,10 +55,10 @@ func TestService_Equip(t *testing.T) {
 
 		// 穿戴挂件与来源一致 ：vip挂件
 		Convey(" wear vip pendant", t, func() {
-			var ArgEquip = &usmdl.ArgEquip{
+			ArgEquip := &usmdl.ArgEquip{
 				Mid:    111001965,
 				Pid:    103,
-				Status: 2, //1 卸载  2 佩戴
+				Status: 2, // 1 卸载  2 佩戴
 				Source: 2, // 0 未知  1背包  2 vip
 			}
 			guard := monkey.PatchInstanceMethod(reflect.TypeOf(s.usRPC), "Equip", func(_ *usrpc.Service2, _ context.Context, _ *usmdl.ArgEquip) error {
@@ -74,10 +72,10 @@ func TestService_Equip(t *testing.T) {
 		})
 		// 穿戴挂件与来源一致 ：背包挂件（背包存在该挂件）
 		Convey(" wear vip pendant", t, func() {
-			var ArgEquip = &usmdl.ArgEquip{
+			ArgEquip := &usmdl.ArgEquip{
 				Mid:    111001965,
 				Pid:    98,
-				Status: 2, //1 卸载  2 佩戴
+				Status: 2, // 1 卸载  2 佩戴
 				Source: 1, // 0 未知  1背包  2 vip
 			}
 			guard := monkey.PatchInstanceMethod(reflect.TypeOf(s.usRPC), "Equip", func(_ *usrpc.Service2, _ context.Context, _ *usmdl.ArgEquip) error {
@@ -92,10 +90,10 @@ func TestService_Equip(t *testing.T) {
 
 		// 穿戴一个背包里不存在的挂件，但是挂件来源是：背包（非vip挂件）,报错
 		Convey(" wear vip pendant", t, func() {
-			var ArgEquip = &usmdl.ArgEquip{
+			ArgEquip := &usmdl.ArgEquip{
 				Mid:    111001965,
 				Pid:    99,
-				Status: 2, //1 卸载  2 佩戴
+				Status: 2, // 1 卸载  2 佩戴
 				Source: 1, // 0 未知  1背包  2 vip
 			}
 			guard := monkey.PatchInstanceMethod(reflect.TypeOf(s.usRPC), "Equip", func(_ *usrpc.Service2, _ context.Context, _ *usmdl.ArgEquip) error {
@@ -110,7 +108,7 @@ func TestService_Equip(t *testing.T) {
 
 		// 卸下挂件(挂件存在)，不会受到 source 的影响
 		Convey(" take off pkg pendant", t, func() {
-			var ArgEquip = &usmdl.ArgEquip{
+			ArgEquip := &usmdl.ArgEquip{
 				Mid: 111001965, Pid: 98, Status: 1, Source: 2,
 			}
 			guard := monkey.PatchInstanceMethod(reflect.TypeOf(s.usRPC), "Equip", func(_ *usrpc.Service2, _ context.Context, _ *usmdl.ArgEquip) error {
@@ -121,11 +119,10 @@ func TestService_Equip(t *testing.T) {
 			Convey("take off pendant is not be affected by source, then err should not be nil", t, func() {
 				So(err, ShouldBeNil)
 			})
-
 		})
 
 		Convey(" take off vip pendant", t, func() {
-			var ArgEquip = &usmdl.ArgEquip{
+			ArgEquip := &usmdl.ArgEquip{
 				Mid: 111001965, Pid: 102, Status: 1, Source: 2,
 			}
 			guard := monkey.PatchInstanceMethod(reflect.TypeOf(s.usRPC), "Equip", func(_ *usrpc.Service2, _ context.Context, _ *usmdl.ArgEquip) error {
@@ -138,7 +135,6 @@ func TestService_Equip(t *testing.T) {
 			})
 		})
 	})
-
 }
 
 //func TestService_Equip(t *testing.T) {

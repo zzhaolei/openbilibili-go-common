@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/tsuna/gohbase/hrpc"
 
 	"go-common/app/admin/main/up/model/datamodel"

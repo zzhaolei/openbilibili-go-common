@@ -9,7 +9,7 @@ import (
 	"go-common/app/service/main/vip/dao"
 	"go-common/app/service/main/vip/model"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	. "github.com/smartystreets/goconvey/convey"
 )
 
@@ -49,13 +49,15 @@ func TestServiceUserInfoByOpenID(t *testing.T) {
 func TestOpenAuthCallBack(t *testing.T) {
 	Convey(" TestOpenAuthCallBack Mock OpenAuthCallBack ", t, func() {
 		monkey.PatchInstanceMethod(reflect.TypeOf(s.dao), "EleOauthGenerateAccessToken", func(_ *dao.Dao,
-			_ context.Context, _ *model.ArgEleAccessToken) (*model.EleAccessTokenResp, error) {
+			_ context.Context, _ *model.ArgEleAccessToken,
+		) (*model.EleAccessTokenResp, error) {
 			return &model.EleAccessTokenResp{
 				OpenID: "aaaaaxxxxxxx",
 			}, nil
 		})
 		monkey.PatchInstanceMethod(reflect.TypeOf(s.dao), "EleUnionUpdateOpenID", func(_ *dao.Dao,
-			_ context.Context, _ *model.ArgEleUnionUpdateOpenID) (*model.EleUnionUpdateOpenIDResp, error) {
+			_ context.Context, _ *model.ArgEleUnionUpdateOpenID,
+		) (*model.EleUnionUpdateOpenIDResp, error) {
 			return &model.EleUnionUpdateOpenIDResp{
 				Status: 1,
 			}, nil

@@ -18,7 +18,7 @@ import (
 
 	"go-common/library/log"
 
-	"github.com/Shopify/sarama"
+	"github.com/IBM/sarama"
 	pb "github.com/pingcap/tidb-tools/tidb_binlog/slave_binlog_proto/go-binlog"
 	pkgerr "github.com/pkg/errors"
 )

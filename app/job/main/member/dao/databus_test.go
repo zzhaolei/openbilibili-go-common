@@ -8,7 +8,7 @@ import (
 
 	"go-common/library/queue/databus"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 

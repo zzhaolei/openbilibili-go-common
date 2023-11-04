@@ -14,7 +14,7 @@ import (
 	"go-common/library/log"
 	"go-common/library/queue/databus"
 
-	"github.com/Shopify/sarama"
+	"github.com/IBM/sarama"
 	cluster "github.com/bsm/sarama-cluster"
 	pb "github.com/gogo/protobuf/proto"
 )
@@ -222,7 +222,7 @@ func (p *Pub) publish(key, header, value []byte) (err error) {
 
 // Publish 发送消息 redis 和 http 协议共用
 func (p *Pub) Publish(key, header, value []byte) (partition int32, offset int64, err error) {
-	var message = &sarama.ProducerMessage{
+	message := &sarama.ProducerMessage{
 		Topic: p.topic,
 		Key:   sarama.ByteEncoder(key),
 		Value: sarama.ByteEncoder(value),
@@ -545,9 +545,7 @@ func (s *Sub) message(enc []byte) (err error) {
 }
 
 func (s *Sub) commit(args [][]byte) (err error) {
-	var (
-		partition, offset int64
-	)
+	var partition, offset int64
 	if len(args) != 2 {
 		log.Error("group(%v) topic(%v) cluster(%s) addr(%s) commit offset error, args(%v) is illegal", s.group, s.topic, s.cluster, s.addr, args)
 		// write error

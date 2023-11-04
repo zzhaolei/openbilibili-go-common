@@ -7,9 +7,9 @@ import (
 	"go-common/app/infra/canal/conf"
 	"go-common/library/log"
 
+	"github.com/go-mysql-org/go-mysql/client"
+	"github.com/go-mysql-org/go-mysql/mysql"
 	"github.com/juju/errors"
-	"github.com/siddontang/go-mysql/client"
-	"github.com/siddontang/go-mysql/mysql"
 )
 
 type dbMasterInfo struct {

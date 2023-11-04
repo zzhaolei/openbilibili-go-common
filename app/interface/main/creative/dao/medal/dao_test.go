@@ -4,9 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"flag"
-	"go-common/app/interface/main/creative/conf"
-	"go-common/app/interface/main/creative/model/medal"
-	"go-common/library/ecode"
 	"io"
 	"net/http"
 	"net/url"
@@ -15,14 +12,16 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/bouk/monkey"
+	"go-common/app/interface/main/creative/conf"
+	"go-common/app/interface/main/creative/model/medal"
+	"go-common/library/ecode"
+
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 	gock "gopkg.in/h2non/gock.v1"
 )
 
-var (
-	d *Dao
-)
+var d *Dao
 
 func TestMain(m *testing.M) {
 	if os.Getenv("DEPLOY_ENV") != "" {
@@ -46,6 +45,7 @@ func TestMain(m *testing.M) {
 	m.Run()
 	os.Exit(0)
 }
+
 func httpMock(method, url string) *gock.Request {
 	r := gock.New(url)
 	r.Method = strings.ToUpper(method)

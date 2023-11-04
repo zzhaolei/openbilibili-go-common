@@ -7,15 +7,13 @@ import (
 
 	"go-common/library/cache/memcache"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
 func TestBlockuserKey(t *testing.T) {
 	convey.Convey("userKey", t, func(convCtx convey.C) {
-		var (
-			mid = int64(0)
-		)
+		mid := int64(0)
 		convCtx.Convey("When everything goes positive", func(convCtx convey.C) {
 			key := userKey(mid)
 			convCtx.Convey("Then key should not be nil.", func(convCtx convey.C) {
@@ -53,9 +51,7 @@ func TestBlockSetSyncBlockTypeID(t *testing.T) {
 
 func TestBlockSyncBlockTypeID(t *testing.T) {
 	convey.Convey("SyncBlockTypeID", t, func(convCtx convey.C) {
-		var (
-			c = context.Background()
-		)
+		c := context.Background()
 		convCtx.Convey("When everything goes positive", func(convCtx convey.C) {
 			id, err := d.SyncBlockTypeID(c)
 			convCtx.Convey("Then err should be nil.id should not be nil.", func(convCtx convey.C) {

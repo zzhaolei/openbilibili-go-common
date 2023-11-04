@@ -10,7 +10,7 @@ import (
 	"go-common/app/job/main/passport-sns/model"
 	xsql "go-common/library/database/sql"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
@@ -33,7 +33,6 @@ func TestDao_AddSnsLog(t *testing.T) {
 				ctx.So(affected, convey.ShouldNotBeNil)
 			})
 		})
-
 	})
 }
 

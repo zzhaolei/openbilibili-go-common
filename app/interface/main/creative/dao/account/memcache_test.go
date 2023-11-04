@@ -2,19 +2,18 @@ package account
 
 import (
 	"context"
-	accmdl "go-common/app/interface/main/creative/model/account"
-	"go-common/library/cache/memcache"
 	"reflect"
 	"testing"
 
-	"github.com/bouk/monkey"
+	accmdl "go-common/app/interface/main/creative/model/account"
+	"go-common/library/cache/memcache"
+
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
 func TestAccountlimitMidHafMin(t *testing.T) {
-	var (
-		mid = int64(2089809)
-	)
+	mid := int64(2089809)
 	convey.Convey("limitMidHafMin", t, func(ctx convey.C) {
 		p1 := limitMidHafMin(mid)
 		ctx.Convey("Then p1 should not be nil.", func(ctx convey.C) {
@@ -24,9 +23,7 @@ func TestAccountlimitMidHafMin(t *testing.T) {
 }
 
 func TestAccountkeyUpInfo(t *testing.T) {
-	var (
-		mid = int64(2089809)
-	)
+	mid := int64(2089809)
 	convey.Convey("keyUpInfo", t, func(ctx convey.C) {
 		p1 := keyUpInfo(mid)
 		ctx.Convey("Then p1 should not be nil.", func(ctx convey.C) {

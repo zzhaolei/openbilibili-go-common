@@ -8,7 +8,7 @@ import (
 	arccli "go-common/app/service/main/archive/api"
 	"go-common/library/time"
 
-	"github.com/siddontang/go-mysql/mysql"
+	"github.com/go-mysql-org/go-mysql/mysql"
 )
 
 // label related params

@@ -7,7 +7,7 @@ import (
 	"go-common/app/infra/notify/model"
 	"go-common/library/log"
 
-	"github.com/Shopify/sarama"
+	"github.com/IBM/sarama"
 )
 
 // Pub define producer.
@@ -82,6 +82,7 @@ func (p *Pub) Send(key, value []byte) (err error) {
 	_, _, err = p.producer.SendMessage(message)
 	return
 }
+
 func key(group, topic string) string {
 	return group + ":" + topic
 }

@@ -3,11 +3,13 @@ package datadao
 import (
 	"context"
 	"encoding/json"
-	"github.com/bouk/monkey"
-	"go-common/library/net/http/blademaster"
 	"net/url"
 	"reflect"
 	"testing"
+
+	"go-common/library/net/http/blademaster"
+
+	"bou.ke/monkey"
 
 	"github.com/smartystreets/goconvey/convey"
 )
@@ -42,9 +44,7 @@ func TestDatadaoHTTPDataHandle(t *testing.T) {
 
 func TestDatadaogetURI(t *testing.T) {
 	convey.Convey("getURI", t, func(ctx convey.C) {
-		var (
-			key = "archives"
-		)
+		key := "archives"
 		ctx.Convey("When everything goes positive", func(ctx convey.C) {
 			uri, err := d.getURI(key)
 			ctx.Convey("Then err should be nil.uri should not be nil.", func(ctx convey.C) {

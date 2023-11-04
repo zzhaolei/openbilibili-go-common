@@ -7,10 +7,10 @@ import (
 	"go-common/app/infra/canal/conf"
 	"go-common/library/log"
 
+	"github.com/go-mysql-org/go-mysql/canal"
+	"github.com/go-mysql-org/go-mysql/mysql"
+	"github.com/go-mysql-org/go-mysql/replication"
 	"github.com/pkg/errors"
-	"github.com/siddontang/go-mysql/canal"
-	"github.com/siddontang/go-mysql/mysql"
-	"github.com/siddontang/go-mysql/replication"
 )
 
 // Instance canal instance
@@ -136,7 +136,7 @@ func (ins *Instance) OnXID(mysql.Position) error {
 	return nil
 }
 
-//OnGTID OnGTID
+// OnGTID OnGTID
 func (ins *Instance) OnGTID(mysql.GTIDSet) error {
 	return nil
 }

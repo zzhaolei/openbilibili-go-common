@@ -10,13 +10,11 @@ import (
 	"go-common/app/job/main/passport-sns/conf"
 	"go-common/library/database/sql"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
-var (
-	d *Dao
-)
+var d *Dao
 
 func TestMain(m *testing.M) {
 	if os.Getenv("DEPLOY_ENV") != "" {
@@ -41,7 +39,7 @@ func TestMain(m *testing.M) {
 }
 
 func TestDaoPing(t *testing.T) {
-	var c = context.Background()
+	c := context.Background()
 	convey.Convey("Ping", t, func(ctx convey.C) {
 		err := d.Ping(c)
 		ctx.Convey("Then err should be nil.", func(ctx convey.C) {

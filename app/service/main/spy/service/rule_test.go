@@ -12,7 +12,7 @@ import (
 	"go-common/app/service/main/spy/model"
 	"go-common/library/ecode"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
@@ -46,7 +46,7 @@ func TestServicegetAuditInfo(t *testing.T) {
 	)
 
 	convey.Convey("getAuditInfo", t, func(ctx convey.C) {
-		var testCases = []struct {
+		testCases := []struct {
 			jiAuditInfo     *model.AuditInfo
 			daoAuditInfo    *model.AuditInfo
 			expectAuditInfo *model.AuditInfo
@@ -86,7 +86,6 @@ func TestServicegetAuditInfo(t *testing.T) {
 				}
 			})
 		}
-
 	})
 }
 
@@ -102,7 +101,7 @@ func TestServicegetProfileInfo(t *testing.T) {
 	)
 
 	convey.Convey("getProfileInfo", t, func(ctx convey.C) {
-		var testCases = []struct {
+		testCases := []struct {
 			jiProfileInfo     *model.ProfileInfo
 			daoProfileInfo    *model.ProfileInfo
 			expectProfileInfo *model.ProfileInfo
@@ -142,7 +141,6 @@ func TestServicegetProfileInfo(t *testing.T) {
 				}
 			})
 		}
-
 	})
 }
 
@@ -163,7 +161,7 @@ func TestServicegetTelRiskInfo(t *testing.T) {
 	)
 
 	convey.Convey("getTelRiskInfo", t, func(ctx convey.C) {
-		var testCases = []struct {
+		testCases := []struct {
 			jiTelRiskInfo          *model.TelRiskInfo
 			daoTelRiskLevel        int8
 			daoRestoreEventHistory *model.UserEventHistory
@@ -216,9 +214,7 @@ func TestServicegetTelRiskInfo(t *testing.T) {
 					ctx.So(tri, convey.ShouldResemble, testCase.expectTelRiskInfo)
 				}
 			})
-
 		}
-
 	})
 }
 
@@ -248,13 +244,12 @@ func TestServicegetJudgementInfo(t *testing.T) {
 			ctx.So(ji.telRiskInfo, convey.ShouldBeNil)
 			ctx.So(err, convey.ShouldBeNil)
 		})
-
 	})
 }
 
 func TestServicegetRuleFunc(t *testing.T) {
 	convey.Convey("getRuleFunc", t, func(ctx convey.C) {
-		var testCases = []struct {
+		testCases := []struct {
 			rule         Rule
 			expectedResp RuleFunc
 		}{
@@ -279,19 +274,16 @@ func TestServicegetRuleFunc(t *testing.T) {
 				}
 			})
 		}
-
 	})
 }
 
 func TestServiceiterRules(t *testing.T) {
-	var (
-		rules = Rules{
-			_telIsBound, _mailIsBound,
-		}
-	)
+	rules := Rules{
+		_telIsBound, _mailIsBound,
+	}
 
 	convey.Convey("iterRules", t, func(ctx convey.C) {
-		var testCases = []struct {
+		testCases := []struct {
 			judgementInfo *JudgementInfo
 			expectRes     IterState
 		}{
@@ -326,48 +318,46 @@ func TestServiceiterRules(t *testing.T) {
 
 func TestServicegetBaseScoreFactor(t *testing.T) {
 	convey.Convey("getBaseScoreFactor", t, func(ctx convey.C) {
-		var (
-			testCases = []struct {
-				judgementInfo *JudgementInfo
-				expectRest    FactoryMeta
-			}{
-				{
-					judgementInfo: &JudgementInfo{
-						auditInfo: &model.AuditInfo{
-							BindTel:  false,
-							BindMail: true,
-						},
-						telRiskInfo: &model.TelRiskInfo{
-							RestoreHistory: &model.UserEventHistory{
-								Mid: int64(0),
-							},
-						},
+		testCases := []struct {
+			judgementInfo *JudgementInfo
+			expectRest    FactoryMeta
+		}{
+			{
+				judgementInfo: &JudgementInfo{
+					auditInfo: &model.AuditInfo{
+						BindTel:  false,
+						BindMail: true,
 					},
-					expectRest: FactoryMeta{
-						serviceName: _defaultService,
-						eventName:   conf.Conf.Property.Event.BindMailAndIdenUnknown,
-						riskLevel:   _defaultRiskLevel,
+					telRiskInfo: &model.TelRiskInfo{
+						RestoreHistory: &model.UserEventHistory{
+							Mid: int64(0),
+						},
 					},
 				},
-				{
-					judgementInfo: &JudgementInfo{
-						auditInfo: &model.AuditInfo{
-							BindTel:  false,
-							BindMail: false,
-						},
-						profileInfo: &model.ProfileInfo{
-							Identification: 1,
-						},
-						telRiskInfo: &model.TelRiskInfo{
-							RestoreHistory: &model.UserEventHistory{
-								Mid: int64(0),
-							},
+				expectRest: FactoryMeta{
+					serviceName: _defaultService,
+					eventName:   conf.Conf.Property.Event.BindMailAndIdenUnknown,
+					riskLevel:   _defaultRiskLevel,
+				},
+			},
+			{
+				judgementInfo: &JudgementInfo{
+					auditInfo: &model.AuditInfo{
+						BindTel:  false,
+						BindMail: false,
+					},
+					profileInfo: &model.ProfileInfo{
+						Identification: 1,
+					},
+					telRiskInfo: &model.TelRiskInfo{
+						RestoreHistory: &model.UserEventHistory{
+							Mid: int64(0),
 						},
 					},
-					expectRest: FactoryMeta{},
 				},
-			}
-		)
+				expectRest: FactoryMeta{},
+			},
+		}
 		for idx, testCase := range testCases {
 			ctx.Convey(fmt.Sprintf("Iterating Case%d...", idx), func(ctx convey.C) {
 				meta, err := s.getBaseScoreFactor(testCase.judgementInfo)
@@ -385,7 +375,7 @@ func TestServicegetBaseScoreFactor(t *testing.T) {
 
 func TestServicetelIsBound(t *testing.T) {
 	convey.Convey("telIsBound", t, func(ctx convey.C) {
-		var testCases = []struct {
+		testCases := []struct {
 			judgementInfo *JudgementInfo
 			expectResp    bool
 		}{
@@ -412,13 +402,12 @@ func TestServicetelIsBound(t *testing.T) {
 				ctx.So(result, convey.ShouldEqual, testCase.expectResp)
 			})
 		}
-
 	})
 }
 
 func TestServicetelIsNotBound(t *testing.T) {
 	convey.Convey("telIsNotBound", t, func(ctx convey.C) {
-		var testCases = []struct {
+		testCases := []struct {
 			judgementInfo *JudgementInfo
 			expectResp    bool
 		}{
@@ -445,13 +434,12 @@ func TestServicetelIsNotBound(t *testing.T) {
 				ctx.So(result, convey.ShouldEqual, testCase.expectResp)
 			})
 		}
-
 	})
 }
 
 func TestServicetelIsLowRisk(t *testing.T) {
 	convey.Convey("telIsLowRisk", t, func(ctx convey.C) {
-		var testCases = []struct {
+		testCases := []struct {
 			judgementInfo *JudgementInfo
 			expectResp    bool
 		}{
@@ -502,13 +490,12 @@ func TestServicetelIsLowRisk(t *testing.T) {
 				ctx.So(result, convey.ShouldEqual, testCase.expectResp)
 			})
 		}
-
 	})
 }
 
 func TestServicetelIsMediumRisk(t *testing.T) {
 	convey.Convey("telIsMediumRisk", t, func(ctx convey.C) {
-		var testCases = []struct {
+		testCases := []struct {
 			judgementInfo *JudgementInfo
 			expectResp    bool
 		}{
@@ -540,13 +527,12 @@ func TestServicetelIsMediumRisk(t *testing.T) {
 				ctx.So(result, convey.ShouldEqual, testCase.expectResp)
 			})
 		}
-
 	})
 }
 
 func TestServicetelIsHighRisk(t *testing.T) {
 	convey.Convey("telIsHighRisk", t, func(ctx convey.C) {
-		var testCases = []struct {
+		testCases := []struct {
 			judgementInfo *JudgementInfo
 			expectResp    bool
 		}{
@@ -585,15 +571,12 @@ func TestServicetelIsHighRisk(t *testing.T) {
 				ctx.So(result, convey.ShouldEqual, testCase.expectResp)
 			})
 		}
-
 	})
-
 }
 
 func TestServicetelIsUnknownRisk(t *testing.T) {
-
 	convey.Convey("telIsUnknownRisk", t, func(ctx convey.C) {
-		var testCases = []struct {
+		testCases := []struct {
 			judgementInfo *JudgementInfo
 			expectResp    bool
 		}{
@@ -622,14 +605,12 @@ func TestServicetelIsUnknownRisk(t *testing.T) {
 				ctx.So(result, convey.ShouldEqual, testCase.expectResp)
 			})
 		}
-
 	})
-
 }
 
 func TestServicemailIsBound(t *testing.T) {
 	convey.Convey("mailIsBound", t, func(ctx convey.C) {
-		var testCases = []struct {
+		testCases := []struct {
 			judgementInfo *JudgementInfo
 			expectResp    bool
 		}{
@@ -656,14 +637,12 @@ func TestServicemailIsBound(t *testing.T) {
 				ctx.So(result, convey.ShouldEqual, testCase.expectResp)
 			})
 		}
-
 	})
-
 }
 
 func TestServicemailIsNotBound(t *testing.T) {
 	convey.Convey("mailIsNotBound", t, func(ctx convey.C) {
-		var testCases = []struct {
+		testCases := []struct {
 			judgementInfo *JudgementInfo
 			expectResp    bool
 		}{
@@ -690,14 +669,12 @@ func TestServicemailIsNotBound(t *testing.T) {
 				ctx.So(result, convey.ShouldEqual, testCase.expectResp)
 			})
 		}
-
 	})
-
 }
 
 func TestServiceidenIsNotAuthed(t *testing.T) {
 	convey.Convey("idenIsNotAuthed", t, func(ctx convey.C) {
-		var testCases = []struct {
+		testCases := []struct {
 			judgementInfo *JudgementInfo
 			expectResp    bool
 		}{
@@ -724,14 +701,12 @@ func TestServiceidenIsNotAuthed(t *testing.T) {
 				ctx.So(result, convey.ShouldEqual, testCase.expectResp)
 			})
 		}
-
 	})
-
 }
 
 func TestServiceidenIsAuthed(t *testing.T) {
 	convey.Convey("idenIsAuthed", t, func(ctx convey.C) {
-		var testCases = []struct {
+		testCases := []struct {
 			judgementInfo *JudgementInfo
 			expectResp    bool
 		}{
@@ -758,6 +733,5 @@ func TestServiceidenIsAuthed(t *testing.T) {
 				ctx.So(result, convey.ShouldEqual, testCase.expectResp)
 			})
 		}
-
 	})
 }

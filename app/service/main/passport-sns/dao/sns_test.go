@@ -11,15 +11,13 @@ import (
 	"go-common/app/service/main/passport-sns/model"
 	xsql "go-common/library/database/sql"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
 func TestDao_SnsApps(t *testing.T) {
 	convey.Convey("SnsApps", t, func(ctx convey.C) {
-		var (
-			c = context.Background()
-		)
+		c := context.Background()
 		ctx.Convey("When everything gose positive", func(ctx convey.C) {
 			res, err := d.SnsApps(c)
 			ctx.Convey("Then err should be nil.res should not nil.", func(ctx convey.C) {
@@ -113,7 +111,6 @@ func TestDao_TxAddSnsUser(t *testing.T) {
 				ctx.So(affected, convey.ShouldNotBeNil)
 			})
 		})
-
 	})
 }
 
@@ -134,7 +131,6 @@ func TestDao_TxAddSnsOpenID(t *testing.T) {
 				ctx.So(affected, convey.ShouldNotBeNil)
 			})
 		})
-
 	})
 }
 
@@ -155,7 +151,6 @@ func TestDao_TxAddSnsToken(t *testing.T) {
 				ctx.So(affected, convey.ShouldNotBeNil)
 			})
 		})
-
 	})
 }
 
@@ -176,7 +171,6 @@ func TestDao_TxUpdateSnsUser(t *testing.T) {
 				ctx.So(affected, convey.ShouldNotBeNil)
 			})
 		})
-
 	})
 }
 
@@ -197,7 +191,6 @@ func TestDao_TxUpdateSnsToken(t *testing.T) {
 				ctx.So(affected, convey.ShouldNotBeNil)
 			})
 		})
-
 	})
 }
 
@@ -219,7 +212,6 @@ func TestDao_DelSnsUser(t *testing.T) {
 				ctx.So(affected, convey.ShouldNotBeNil)
 			})
 		})
-
 	})
 }
 
@@ -240,7 +232,6 @@ func TestDao_DelAllSnsUser(t *testing.T) {
 				ctx.So(affected, convey.ShouldNotBeNil)
 			})
 		})
-
 	})
 }
 

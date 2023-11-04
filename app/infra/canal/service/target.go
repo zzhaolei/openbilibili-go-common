@@ -14,8 +14,8 @@ import (
 	"go-common/library/log"
 	"go-common/library/queue/databus"
 
+	"github.com/go-mysql-org/go-mysql/canal"
 	"github.com/pkg/errors"
-	"github.com/siddontang/go-mysql/canal"
 )
 
 var (
@@ -205,7 +205,8 @@ func (t *Target) proc(ch chan *canal.RowsEvent) {
 // makeDatas parse the binlog event and return the model.Data struct
 // a little bit cautious about the binlog type
 // if the type is update:
-//     the old value and new value will alternate appearing in the event.Rows
+//
+//	the old value and new value will alternate appearing in the event.Rows
 func makeDatas(e *canal.RowsEvent, tbMap map[string]*conf.Addition) (datas []*model.Data, err error) {
 	var (
 		rowsLen     = len(e.Rows)

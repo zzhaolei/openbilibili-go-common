@@ -7,10 +7,11 @@ import (
 
 	"go-common/library/ecode"
 
-	"github.com/bouk/monkey"
+	hbase "go-common/library/database/hbase.v2"
+
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 	"github.com/tsuna/gohbase/hrpc"
-	hbase "go-common/library/database/hbase.v2"
 )
 
 func TestArtThirtyDay(t *testing.T) {
@@ -87,7 +88,6 @@ func TestReadAnalysis(t *testing.T) {
 		ctx.Convey("Then err should be nil.res should not be nil.", func(ctx convey.C) {
 			ctx.So(err, convey.ShouldNotBeNil)
 		})
-
 	})
 	convey.Convey("TestReadAnalysis2", t, func(ctx convey.C) {
 		guard := monkey.PatchInstanceMethod(reflect.TypeOf(d.hbase), "GetStr", func(_ *hbase.Client, _ context.Context, _, _ string, _ ...func(hrpc.Call) error) (*hrpc.Result, error) {

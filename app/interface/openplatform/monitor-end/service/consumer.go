@@ -10,7 +10,7 @@ import (
 	"go-common/app/interface/openplatform/monitor-end/model/kafka"
 	"go-common/library/log"
 
-	"github.com/Shopify/sarama"
+	"github.com/IBM/sarama"
 	cluster "github.com/bsm/sarama-cluster"
 )
 

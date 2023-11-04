@@ -8,11 +8,11 @@ import (
 	"go-common/app/admin/main/apm/dao/mock"
 	"go-common/app/admin/main/apm/model/need"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
-//TestServiceNeedList is
+// TestServiceNeedList is
 func TestServiceNeedList(t *testing.T) {
 	convey.Convey("TestServiceNeedList", t, func() {
 		arg := &need.NListReq{
@@ -28,11 +28,10 @@ func TestServiceNeedList(t *testing.T) {
 		}
 		convey.So(res, convey.ShouldNotBeNil)
 		convey.So(err, convey.ShouldBeNil)
-
 	})
 }
 
-//TestServiceNeedEdit is
+// TestServiceNeedEdit is
 func TestServiceNeedEdit(t *testing.T) {
 	convey.Convey("TestServiceNeedEdit", t, func() {
 		arg := &need.NEditReq{
@@ -58,10 +57,9 @@ func TestServiceNeedEdit(t *testing.T) {
 		err := svr.NeedInfoEdit(context.Background(), arg, "fss")
 		convey.So(err, convey.ShouldEqual, -403)
 	})
-
 }
 
-//TestServiceNeedVerify is
+// TestServiceNeedVerify is
 func TestServiceNeedVerify(t *testing.T) {
 	convey.Convey("TestServiceNeedVerify status err", t, func() {
 		arg := &need.NVerifyReq{
@@ -78,9 +76,7 @@ func TestServiceNeedVerify(t *testing.T) {
 		}
 		_, err := svr.NeedInfoVerify(context.Background(), arg)
 		convey.So(err, convey.ShouldEqual, 70017)
-
 	})
-
 }
 
 func TestServiceNeedVote(t *testing.T) {
@@ -130,6 +126,7 @@ func TestServiceNeedVoteList(t *testing.T) {
 		})
 	})
 }
+
 func TestServiceNeedInfoAdd(t *testing.T) {
 	convey.Convey("NeedInfoAdd", t, func(ctx convey.C) {
 		var (
@@ -158,6 +155,7 @@ func TestServiceNeedInfoAdd(t *testing.T) {
 		})
 	})
 }
+
 func TestServiceSendWeMessage(t *testing.T) {
 	convey.Convey("SendWeMessage", t, func(convCtx convey.C) {
 		var (

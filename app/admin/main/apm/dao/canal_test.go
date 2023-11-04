@@ -7,7 +7,7 @@ import (
 
 	cml "go-common/app/admin/main/apm/model/canal"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/jinzhu/gorm"
 	"github.com/smartystreets/goconvey/convey"
 )

@@ -16,7 +16,7 @@ import (
 	bm "go-common/library/net/http/blademaster"
 	"go-common/library/net/metadata"
 
-	"github.com/siddontang/go-mysql/mysql"
+	"github.com/go-mysql-org/go-mysql/mysql"
 )
 
 func register(ctx *bm.Context) {
@@ -127,7 +127,7 @@ func specialUps(c *bm.Context) {
 	groupStr := params.Get("group_id")
 	var err error
 	// check params
-	//default all groups
+	// default all groups
 	groupID := int64(0)
 	if groupStr != "" {
 		groupID, err = strconv.ParseInt(groupStr, 10, 64)
@@ -145,7 +145,7 @@ func specialUps(c *bm.Context) {
 func specialDel(c *bm.Context) {
 	var res interface{}
 	var err error
-	var r = new(struct {
+	r := new(struct {
 		Ids string `form:"ids" validate:"required"`
 	})
 	if err = c.Bind(r); err != nil {
@@ -154,10 +154,10 @@ func specialDel(c *bm.Context) {
 		c.JSON(res, err)
 		return
 	}
-	var idstr = strings.Split(r.Ids, ",")
+	idstr := strings.Split(r.Ids, ",")
 	for _, s := range idstr {
 		var affectedRow int64
-		var id, e = strconv.ParseInt(s, 10, 64)
+		id, e := strconv.ParseInt(s, 10, 64)
 		err = e
 		if err != nil {
 			log.Error("id is not integer, id=%s", s)
@@ -173,7 +173,7 @@ func specialAdd(c *bm.Context) {
 	var res interface{}
 	var err error
 	var errMsg string
-	var r = new(struct {
+	r := new(struct {
 		GroupIds string `form:"group_ids" validate:"required"` // 支持多个group id，用,分隔
 		MidStr   string `form:"mids" validate:"required"`      // 支持多个mid，用,分隔
 		Note     string `form:"note" default:""`
@@ -186,17 +186,17 @@ func specialAdd(c *bm.Context) {
 			errMsg = "params error"
 			break
 		}
-		var groupIds = strings.Split(r.GroupIds, ",")
+		groupIds := strings.Split(r.GroupIds, ",")
 		// 检查是否有特殊权限
 		for _, groupIDStr := range groupIds {
-			var groupID, _ = strconv.ParseInt(groupIDStr, 10, 64)
-			var e = Svc.SpecialGroupPermit(c, groupID)
+			groupID, _ := strconv.ParseInt(groupIDStr, 10, 64)
+			e := Svc.SpecialGroupPermit(c, groupID)
 			if e != nil {
 				err = e
 				break
 			}
 		}
-		var midStrArray = strings.Split(r.MidStr, ",")
+		midStrArray := strings.Split(r.MidStr, ",")
 		if len(midStrArray) == 0 {
 			log.Error("params error, no mid got, mid=%s", r.MidStr)
 			err = ecode.RequestErr
@@ -230,14 +230,14 @@ func specialAdd(c *bm.Context) {
 			errMsg = "params error, wrong mid got"
 			break
 		}
-		var uname, _ = bmGetStringOrDefault(c, "username", "unkown")
+		uname, _ := bmGetStringOrDefault(c, "username", "unkown")
 		for _, groupIDStr := range groupIds {
-			var groupID, err2 = strconv.ParseInt(groupIDStr, 10, 64)
+			groupID, err2 := strconv.ParseInt(groupIDStr, 10, 64)
 			if err2 != nil {
 				log.Warn("group id convert fail, group id=%s", groupIDStr)
 				continue
 			}
-			var data = &model.UpSpecial{
+			data := &model.UpSpecial{
 				GroupID: groupID,
 				Note:    r.Note,
 				UID:     uid,
@@ -245,7 +245,7 @@ func specialAdd(c *bm.Context) {
 			go func() {
 				const step = 100
 				for start := 0; start < len(mids); start += step {
-					var end = start + step
+					end := start + step
 					if end > len(mids) {
 						end = len(mids)
 					}
@@ -257,11 +257,9 @@ func specialAdd(c *bm.Context) {
 					}
 					log.Info("add special, id=%v, group id=%d", mids, groupID)
 				}
-
 			}()
 
 		}
-
 	}
 
 	if err != nil {
@@ -275,7 +273,7 @@ func specialEdit(c *bm.Context) {
 	var res interface{}
 	var err error
 	var errMsg string
-	var r = new(struct {
+	r := new(struct {
 		GroupID int64  `form:"group_id" validate:"required"`
 		Mid     int64  `form:"mid"`
 		ID      int64  `form:"id" validate:"required"`
@@ -300,7 +298,7 @@ func specialEdit(c *bm.Context) {
 		if ok {
 			uid = uidtemp.(int64)
 		}
-		var data = &model.UpSpecial{
+		data := &model.UpSpecial{
 			GroupID: r.GroupID,
 			Note:    r.Note,
 			UID:     uid,
@@ -327,7 +325,7 @@ func specialGet(c *bm.Context) {
 	var data interface{}
 	var err error
 	var errMsg string
-	var r = new(model.GetSpecialArg)
+	r := new(model.GetSpecialArg)
 	var ups []*model.UpSpecialWithName
 	switch {
 	default:
@@ -373,13 +371,12 @@ func specialGet(c *bm.Context) {
 	if err != nil {
 		service.BmHTTPErrorWithMsg(c, err, errMsg)
 	} else {
-
 		if r.Export == "csv" {
 			c.Writer.Header().Set("Content-Type", "application/csv")
 			c.Writer.Header().Set("Content-Disposition", fmt.Sprintf("attachment;filename=\"up_special_%s.csv\"", time.Now().Format(mysql.TimeFormat)))
 
-			var buf = &bytes.Buffer{}
-			var csvWriter = csv.NewWriter(buf)
+			buf := &bytes.Buffer{}
+			csvWriter := csv.NewWriter(buf)
 			csvWriter.Write((&model.UpSpecialWithName{}).GetTitleFields())
 			for _, v := range ups {
 				csvWriter.Write(v.ToStringFields())
@@ -396,7 +393,7 @@ func specialGetByMid(c *bm.Context) {
 	var data interface{}
 	var err error
 	var errMsg string
-	var r = new(model.GetSpecialByMidArg)
+	r := new(model.GetSpecialByMidArg)
 	switch {
 	default:
 		if err = c.Bind(r); err != nil {

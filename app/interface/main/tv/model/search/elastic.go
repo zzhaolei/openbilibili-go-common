@@ -7,7 +7,7 @@ import (
 	"go-common/app/interface/main/tv/model/thirdp"
 	"go-common/library/time"
 
-	"github.com/siddontang/go-mysql/mysql"
+	"github.com/go-mysql-org/go-mysql/mysql"
 )
 
 const (
@@ -169,7 +169,7 @@ type ReqUgcIdx struct {
 
 // TimeStr picks json str from request and returns the time range struct in String format
 func (v *ReqUgcIdx) TimeStr() (res *UgcTime, err error) {
-	var pubTimeV = &UgcTimeV{}
+	pubTimeV := &UgcTimeV{}
 	if err = json.Unmarshal([]byte(v.PubTime), &pubTimeV); err != nil {
 		return
 	}

@@ -12,7 +12,7 @@ import (
 	"go-common/app/service/live/resource/model"
 	"go-common/library/log"
 
-	"github.com/siddontang/go-mysql/mysql"
+	"github.com/go-mysql-org/go-mysql/mysql"
 )
 
 const (
@@ -128,9 +128,9 @@ func (d *Dao) editDBResource(c context.Context, id int64, update map[string]inte
 	if update == nil || id < 0 {
 		return
 	}
-	var tx = d.rsDB
+	tx := d.rsDB
 	tableInfo := &model.Resource{}
-	var reply = tx.Model(tableInfo).Where("id=?", id).Update(update)
+	reply := tx.Model(tableInfo).Where("id=?", id).Update(update)
 	log.Info("effected rows: %d, id : %d", reply.RowsAffected, id)
 	if reply.Error != nil {
 		log.Error("resource.editResource error: %v", err)
@@ -144,7 +144,7 @@ func (d *Dao) getDBResourceList(c context.Context, typ string, page int64, pageS
 	if typ == "" {
 		return
 	}
-	var tx = d.rsDBReader
+	tx := d.rsDBReader
 	tableInfo := &model.Resource{}
 	err = tx.Model(tableInfo).
 		Select("`id`,`platform`,`build`,`limit_type`,`start_time`,`end_time`,`title`,`image_info`").
@@ -198,7 +198,7 @@ func (d *Dao) getDBResourceListEx(c context.Context, typ []string, page int64, p
 	if endTime != "" {
 		whereStr += fmt.Sprintf(" and `end_time`<=\"%s\"", mysql.Escape(endTime))
 	}
-	var tx = d.rsDBReader
+	tx := d.rsDBReader
 	tableInfo := &model.Resource{}
 	err = tx.Model(tableInfo).
 		Select("`id`,`platform`,`build`,`limit_type`,`start_time`,`end_time`,`title`,`image_info`,`type`").
@@ -221,11 +221,12 @@ func (d *Dao) getDBResourceListEx(c context.Context, typ []string, page int64, p
 	}
 	return
 }
+
 func (d *Dao) getDBCount(c context.Context, typ string) (resp int64, err error) {
 	if typ == "" {
 		return
 	}
-	var tx = d.rsDBReader
+	tx := d.rsDBReader
 	tableInfo := &model.Resource{}
 	err = tx.Model(tableInfo).
 		Select("`id`").
@@ -237,6 +238,7 @@ func (d *Dao) getDBCount(c context.Context, typ string) (resp int64, err error) 
 	}
 	return
 }
+
 func (d *Dao) offlineDBResource(c context.Context, id int64) (row int64, err error) {
 	if id == 0 {
 		return
@@ -246,9 +248,9 @@ func (d *Dao) offlineDBResource(c context.Context, id int64) (row int64, err err
 		log.Error("resource.OfflineResource select error: %v reply %v", err, reply)
 		return
 	}
-	var tx = d.rsDB
+	tx := d.rsDB
 	tableInfo := &model.Resource{}
-	var updateReply = tx.Model(tableInfo).Where("id=?", id).Update("end_time", time.Now())
+	updateReply := tx.Model(tableInfo).Where("id=?", id).Update("end_time", time.Now())
 	if updateReply.Error != nil {
 		log.Error("resource.OfflineResource update error: %v", err)
 		return
@@ -261,8 +263,8 @@ func (d *Dao) selectDBById(c context.Context, id int64) (resp *model.Resource, e
 		return
 	}
 	resp = &model.Resource{}
-	var tx = d.rsDBReader
-	var reply = tx.Model(&model.Resource{}).Where("id=?", id).Find(resp)
+	tx := d.rsDBReader
+	reply := tx.Model(&model.Resource{}).Where("id=?", id).Find(resp)
 	if reply.Error != nil {
 		log.Error("resource.SelectById error: %v", err)
 		return
@@ -275,9 +277,9 @@ func (d *Dao) getDBInfo(ctx context.Context, typ string, platform string, build 
 		return
 	}
 	resp = &model.Resource{}
-	var tx = d.rsDBReader
+	tx := d.rsDBReader
 	now := time.Now()
-	var reply = tx.Model(&model.Resource{}).Where("start_time<? and end_time>? and type=? and `platform`=? and ((`limit_type`=0 and `build`<=?) or (`limit_type`=1 and `build`=?) or (`limit_type`=2 and `build`>=?))", now, now, typ, platform, build, build, build).Limit(1).Find(resp)
+	reply := tx.Model(&model.Resource{}).Where("start_time<? and end_time>? and type=? and `platform`=? and ((`limit_type`=0 and `build`<=?) or (`limit_type`=1 and `build`=?) or (`limit_type`=2 and `build`>=?))", now, now, typ, platform, build, build, build).Limit(1).Find(resp)
 	if reply.Error != nil {
 		log.Error("resource.GetInfo error: %v", err)
 		return
@@ -289,8 +291,8 @@ func (d *Dao) getDBBanner(ctx context.Context, platform string, build int64, t s
 	if platform == "" || build == 0 || t == "" {
 		return
 	}
-	var tx = d.rsDBReader
-	var reply = tx.Model(&model.Resource{}).Where("`start_time`<? and `end_time`>? and `type`=? and (`platform`='' or `platform`=?) and ((`limit_type`=0 and `build`<=?) or (`limit_type`=1 and `build`=?) or (`limit_type`=2 and `build`>=?))", time.Now(), time.Now(), t, platform, build, build, build).Order("mtime DESC").Find(&resp)
+	tx := d.rsDBReader
+	reply := tx.Model(&model.Resource{}).Where("`start_time`<? and `end_time`>? and `type`=? and (`platform`='' or `platform`=?) and ((`limit_type`=0 and `build`<=?) or (`limit_type`=1 and `build`=?) or (`limit_type`=2 and `build`>=?))", time.Now(), time.Now(), t, platform, build, build, build).Order("mtime DESC").Find(&resp)
 	if reply.Error != nil {
 		log.Error("resource.GetBanner error: %v", err)
 		return
@@ -303,9 +305,9 @@ func (d *Dao) selectDBByTypeAndPlatform(ctx context.Context, typ string, platfor
 		return
 	}
 	resp = &model.Resource{}
-	var tx = d.rsDBReader
+	tx := d.rsDBReader
 	now := time.Now()
-	var reply = tx.Model(&model.Resource{}).Where("`type`=? and `end_time`>? and `platform`=? ", typ, now, platform).Limit(1).Find(resp)
+	reply := tx.Model(&model.Resource{}).Where("`type`=? and `end_time`>? and `platform`=? ", typ, now, platform).Limit(1).Find(resp)
 	if reply.Error != nil {
 		resp = nil
 		log.Error("resource.SelectByTypeAndPlatform error: %v", err)

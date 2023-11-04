@@ -9,16 +9,14 @@ import (
 
 	"go-common/library/database/hbase.v2"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 	"github.com/tsuna/gohbase/hrpc"
 )
 
 func TestWeeklyhonorreverseString(t *testing.T) {
 	convey.Convey("reverseString", t, func(ctx convey.C) {
-		var (
-			s = ""
-		)
+		s := ""
 		ctx.Convey("When everything gose positive", func(ctx convey.C) {
 			p1 := reverseString(s)
 			ctx.Convey("Then p1 should not be nil.", func(ctx convey.C) {

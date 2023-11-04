@@ -10,15 +10,13 @@ import (
 	model "go-common/app/job/main/member/model/block"
 	xsql "go-common/library/database/sql"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
 func TestBlockhistoryIdx(t *testing.T) {
 	convey.Convey("historyIdx", t, func(convCtx convey.C) {
-		var (
-			mid = int64(0)
-		)
+		mid := int64(0)
 		convCtx.Convey("When everything goes positive", func(convCtx convey.C) {
 			p1 := historyIdx(mid)
 			convCtx.Convey("Then p1 should not be nil.", func(convCtx convey.C) {
@@ -121,7 +119,6 @@ func TestBlockUserExtra(t *testing.T) {
 			convCtx.So(err, convey.ShouldBeNil)
 			convCtx.So(ex, convey.ShouldBeNil)
 		})
-
 	})
 }
 
@@ -272,6 +269,5 @@ func TestBlockUpsertAddBlockCount(t *testing.T) {
 				convCtx.So(err, convey.ShouldNotBeNil)
 			})
 		})
-
 	})
 }

@@ -7,7 +7,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/golang/freetype/raster"
 	"github.com/golang/freetype/truetype"
 	"github.com/smartystreets/goconvey/convey"
@@ -125,9 +125,7 @@ func TestDrawimgfillColor(t *testing.T) {
 
 func TestDrawimgtextWidth(t *testing.T) {
 	convey.Convey("textWidth", t, func(ctx convey.C) {
-		var (
-			text = "12"
-		)
+		text := "12"
 		ctx.Convey("When everything gose positive", func(ctx convey.C) {
 			monkeyFontBox(fixed.Point26_6{}, nil)
 			err := di.textWidth(text)
@@ -180,7 +178,7 @@ func TestDrawimgcomposite(t *testing.T) {
 		)
 		ctx.Convey("When everything gose positive", func(ctx convey.C) {
 			monkeyDraw()
-			//monkeybounds(imgRectangle)
+			// monkeybounds(imgRectangle)
 			di.composite(dstCanvas, src, isLeft)
 			ctx.Convey("No return values", func(ctx convey.C) {
 			})
@@ -196,7 +194,7 @@ func TestDrawimgDraw(t *testing.T) {
 			isLeft   bool
 		)
 		ctx.Convey("When everything gose positive", func(ctx convey.C) {
-			//monkeybounds(imgRectangle)
+			// monkeybounds(imgRectangle)
 			monkeyFreeTypeSetFont()
 			err := di.Draw(text, savepath, isLeft)
 			ctx.Convey("Then err should be nil.", func(ctx convey.C) {

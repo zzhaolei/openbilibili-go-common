@@ -3,19 +3,18 @@ package archive
 import (
 	"context"
 	"fmt"
-	xsql "go-common/library/database/sql"
 	"reflect"
 	"testing"
 
-	"github.com/bouk/monkey"
+	xsql "go-common/library/database/sql"
+
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
 func TestMusics(t *testing.T) {
 	convey.Convey("Musics", t, func(ctx convey.C) {
-		var (
-			c = context.Background()
-		)
+		c := context.Background()
 		ctx.Convey("uat db ok", func(ctx convey.C) {
 			_, err := d.AllMusics(c)
 			ctx.Convey("Then err should be nil.bizs should not be nil.", func(ctx convey.C) {

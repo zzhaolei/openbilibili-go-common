@@ -2,15 +2,16 @@ package article
 
 import (
 	"context"
-	artMdl "go-common/app/interface/main/creative/model/article"
+	"reflect"
 	"testing"
+
+	artMdl "go-common/app/interface/main/creative/model/article"
 
 	"go-common/app/interface/openplatform/article/model"
 	"go-common/app/interface/openplatform/article/rpc/client"
 	"go-common/library/ecode"
-	"reflect"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
@@ -228,11 +229,11 @@ func TestArticleArticleStat(t *testing.T) {
 	)
 	convey.Convey("ArticleStat", t, func(ctx convey.C) {
 		// mock
-		//mock := monkey.PatchInstanceMethod(reflect.TypeOf(d.art), "CreationUpStat",
+		// mock := monkey.PatchInstanceMethod(reflect.TypeOf(d.art), "CreationUpStat",
 		//	func(_ *client.Service, _ context.Context, _ *model.ArgMid) (res model.UpStat, err error) {
 		//		return new(model.UpStat), ecode.CreativeArticleRPCErr
 		//	})
-		//defer mock.Unpatch()
+		// defer mock.Unpatch()
 		res, err := d.ArticleStat(c, mid, ip)
 		ctx.Convey("Then err should be nil.res should not be nil.", func(ctx convey.C) {
 			ctx.So(err, convey.ShouldNotBeNil)
@@ -263,7 +264,7 @@ func TestArticleArticleMetas(t *testing.T) {
 		ip   = ""
 	)
 	convey.Convey("ArticleMetas", t, func(ctx convey.C) {
-		//mock
+		// mock
 		mock := monkey.PatchInstanceMethod(reflect.TypeOf(d.art), "ArticleMetas",
 			func(_ *client.Service, _ context.Context, _ *model.ArgAids) (res map[int64]*model.Meta, err error) {
 				return nil, ecode.CreativeArticleRPCErr

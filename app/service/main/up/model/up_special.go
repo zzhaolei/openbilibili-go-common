@@ -2,11 +2,12 @@ package model
 
 import (
 	"fmt"
-	"github.com/siddontang/go-mysql/mysql"
 	"time"
+
+	"github.com/go-mysql-org/go-mysql/mysql"
 )
 
-//GetSpecialArg arg
+// GetSpecialArg arg
 type GetSpecialArg struct {
 	GroupID   int    `form:"group_id"`
 	UID       int    `form:"uid"`
@@ -21,24 +22,24 @@ type GetSpecialArg struct {
 	AdminName string `form:"admin_name"` // 管理员昵称
 }
 
-//UpSpecialWithName arg with name
+// UpSpecialWithName arg with name
 type UpSpecialWithName struct {
 	UpSpecial
 	UName     string `json:"uname"`
 	AdminName string `json:"admin_name"`
 }
 
-//GetSpecialByMidArg arg
+// GetSpecialByMidArg arg
 type GetSpecialByMidArg struct {
 	Mid int `form:"mid" validate:"required"`
 }
 
-//Copy copy
+// Copy copy
 func (u *UpSpecialWithName) Copy(special *UpSpecial) {
 	u.UpSpecial = *special
 }
 
-//GetTitleFields get title fields
+// GetTitleFields get title fields
 func (u *UpSpecialWithName) GetTitleFields() []string {
 	return []string{
 		"配置时间",
@@ -51,10 +52,10 @@ func (u *UpSpecialWithName) GetTitleFields() []string {
 	}
 }
 
-//ToStringFields get to string fields
+// ToStringFields get to string fields
 func (u *UpSpecialWithName) ToStringFields() []string {
 	var fields []string
-	var mtime = time.Unix(int64(u.MTime), 0)
+	mtime := time.Unix(int64(u.MTime), 0)
 	fields = append(fields, fmt.Sprintf("%v", mtime.Format(mysql.TimeFormat)))
 	fields = append(fields, fmt.Sprintf("%v", u.Mid))
 	fields = append(fields, fmt.Sprintf("%v", u.UName))

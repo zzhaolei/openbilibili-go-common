@@ -7,7 +7,7 @@ import (
 
 	"go-common/library/time"
 
-	"github.com/siddontang/go-mysql/mysql"
+	"github.com/go-mysql-org/go-mysql/mysql"
 )
 
 // TVEpContent reprensents the content table

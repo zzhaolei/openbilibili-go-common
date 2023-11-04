@@ -2,13 +2,14 @@ package data
 
 import (
 	"context"
-	"go-common/app/interface/main/creative/model/data"
-	artmdl "go-common/app/interface/openplatform/article/model"
-	"go-common/library/cache/memcache"
 	"reflect"
 	"testing"
 
-	"github.com/bouk/monkey"
+	"go-common/app/interface/main/creative/model/data"
+	artmdl "go-common/app/interface/openplatform/article/model"
+	"go-common/library/cache/memcache"
+
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
@@ -118,9 +119,7 @@ func TestDatakeyThirtyDayArchive(t *testing.T) {
 }
 
 func TestDatakeyThirtyDayArticle(t *testing.T) {
-	var (
-		mid = int64(1)
-	)
+	mid := int64(1)
 	convey.Convey("keyThirtyDayArticle", t, func(ctx convey.C) {
 		p1 := keyThirtyDayArticle(mid)
 		ctx.Convey("Then p1 should not be nil.", func(ctx convey.C) {

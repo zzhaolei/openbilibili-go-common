@@ -7,7 +7,7 @@ import (
 
 	"go-common/app/admin/main/apm/dao"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
@@ -16,6 +16,7 @@ func TestUser(t *testing.T) {
 		t.Log("user test")
 	})
 }
+
 func TestServiceGetUser(t *testing.T) {
 	convey.Convey("GetUser", t, func(ctx convey.C) {
 		var (

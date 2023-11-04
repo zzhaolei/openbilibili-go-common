@@ -5,18 +5,20 @@ import (
 	"context"
 	"encoding/csv"
 	"fmt"
-	"github.com/siddontang/go-mysql/mysql"
+	"time"
+
 	"go-common/app/admin/main/up/dao/upcrm"
 	"go-common/app/admin/main/up/model/upcrmmodel"
 	"go-common/app/admin/main/up/service"
 	"go-common/library/ecode"
 	"go-common/library/log"
 	"go-common/library/net/http/blademaster"
-	"time"
+
+	"github.com/go-mysql-org/go-mysql/mysql"
 )
 
 func getTitleFields(compareType int) []string {
-	var compareTitle = ""
+	compareTitle := ""
 	switch compareType {
 	case upcrmmodel.CompareType7day:
 		compareTitle = "7日前"
@@ -35,7 +37,7 @@ func getTitleFields(compareType int) []string {
 }
 
 func getScoreName(scoreType int) string {
-	var name = "分数"
+	name := "分数"
 	switch scoreType {
 	case upcrm.ScoreTypePr:
 		name = "影响力分"
@@ -72,7 +74,7 @@ func getScoreQueryContentField(result *upcrmmodel.ScoreQueryResult, index int) [
 }
 
 func crmScoreQuery(c *blademaster.Context) {
-	var arg = new(upcrmmodel.ScoreQueryArgs)
+	arg := new(upcrmmodel.ScoreQueryArgs)
 	var res interface{}
 	var err error
 	var errMsg string
@@ -103,8 +105,8 @@ func crmScoreQuery(c *blademaster.Context) {
 			c.Writer.Header().Set("Content-Type", "application/csv")
 			c.Writer.Header().Set("Content-Disposition", fmt.Sprintf("attachment;filename=\"%s_%s.csv\"", getScoreName(arg.ScoreType), time.Now().Format(mysql.TimeFormat)))
 
-			var buf = &bytes.Buffer{}
-			var csvWriter = csv.NewWriter(buf)
+			buf := &bytes.Buffer{}
+			csvWriter := csv.NewWriter(buf)
 			csvWriter.Write(getTitleFields(arg.CompareType))
 			for i := 0; i < len(scoreRes.XAxis); i++ {
 				csvWriter.Write(getScoreQueryContentField(&scoreRes, i))

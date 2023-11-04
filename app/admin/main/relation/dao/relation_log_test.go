@@ -2,7 +2,6 @@ package dao
 
 import (
 	"context"
-
 	"fmt"
 	"reflect"
 	"testing"
@@ -10,16 +9,14 @@ import (
 
 	"go-common/library/database/hbase.v2"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 	"github.com/tsuna/gohbase/hrpc"
 )
 
 func TestDaoreverse(t *testing.T) {
 	convey.Convey("reverse", t, func(convCtx convey.C) {
-		var (
-			s = ""
-		)
+		s := ""
 		convCtx.Convey("When everything goes positive", func(convCtx convey.C) {
 			p1 := reverse(s)
 			convCtx.Convey("Then p1 should not be nil.", func(convCtx convey.C) {
@@ -80,6 +77,5 @@ func TestDaoRelationLogs(t *testing.T) {
 				convCtx.So(p1, convey.ShouldBeNil)
 			})
 		})
-
 	})
 }

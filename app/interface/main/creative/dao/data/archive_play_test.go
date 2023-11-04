@@ -3,22 +3,21 @@ package data
 import (
 	"context"
 	"encoding/binary"
-	"go-common/app/interface/main/creative/model/data"
-	"go-common/library/ecode"
 	"reflect"
 	"testing"
 
+	"go-common/app/interface/main/creative/model/data"
+	"go-common/library/ecode"
+
 	hbase "go-common/library/database/hbase.v2"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 	"github.com/tsuna/gohbase/hrpc"
 )
 
 func TestDatasourceOtherMerge(t *testing.T) {
-	var (
-		v = ""
-	)
+	v := ""
 	convey.Convey("sourceOtherMerge", t, func(ctx convey.C) {
 		p1 := sourceOtherMerge(v)
 		ctx.Convey("Then p1 should not be nil.", func(ctx convey.C) {
@@ -28,9 +27,7 @@ func TestDatasourceOtherMerge(t *testing.T) {
 }
 
 func TestDatareverseString(t *testing.T) {
-	var (
-		s = ""
-	)
+	s := ""
 	convey.Convey("reverseString", t, func(ctx convey.C) {
 		p1 := reverseString(s)
 		ctx.Convey("Then p1 should not be nil.", func(ctx convey.C) {
@@ -53,9 +50,7 @@ func TestDatafansRowKey(t *testing.T) {
 }
 
 func TestDataplaySourceKey(t *testing.T) {
-	var (
-		id = int64(0)
-	)
+	id := int64(0)
 	convey.Convey("playSourceKey", t, func(ctx convey.C) {
 		p1 := playSourceKey(id)
 		ctx.Convey("Then p1 should not be nil.", func(ctx convey.C) {
@@ -65,9 +60,7 @@ func TestDataplaySourceKey(t *testing.T) {
 }
 
 func TestDataarcPlayKey(t *testing.T) {
-	var (
-		id = int64(0)
-	)
+	id := int64(0)
 	convey.Convey("arcPlayKey", t, func(ctx convey.C) {
 		p1 := arcPlayKey(id)
 		ctx.Convey("Then p1 should not be nil.", func(ctx convey.C) {
@@ -104,9 +97,7 @@ func TestDataupFansMedalRowKey(t *testing.T) {
 }
 
 func TestDatabyteToInt32(t *testing.T) {
-	var (
-		b = []byte{255, 255, 255, 249}
-	)
+	b := []byte{255, 255, 255, 249}
 	convey.Convey("byteToInt32", t, func(ctx convey.C) {
 		p1 := byteToInt32(b)
 		ctx.Convey("Then p1 should not be nil.", func(ctx convey.C) {

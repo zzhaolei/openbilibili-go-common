@@ -8,7 +8,7 @@ import (
 	"go-common/app/service/main/secure/model"
 	"go-common/library/cache/memcache"
 
-	"github.com/bouk/monkey"
+	"bou.ke/monkey"
 	. "github.com/smartystreets/goconvey/convey"
 )
 

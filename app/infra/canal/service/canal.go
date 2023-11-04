@@ -19,7 +19,7 @@ import (
 	"go-common/library/net/netutil"
 	"go-common/library/stat/prom"
 
-	"github.com/siddontang/go-mysql/client"
+	"github.com/go-mysql-org/go-mysql/client"
 )
 
 var (

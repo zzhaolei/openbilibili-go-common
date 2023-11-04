@@ -4,20 +4,19 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"go-common/app/interface/main/creative/conf"
-	"go-common/app/interface/main/creative/model/archive"
-	"go-common/library/database/sql"
 	"os"
 	"reflect"
 	"testing"
 
-	"github.com/bouk/monkey"
+	"go-common/app/interface/main/creative/conf"
+	"go-common/app/interface/main/creative/model/archive"
+	"go-common/library/database/sql"
+
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
-var (
-	d *Dao
-)
+var d *Dao
 
 func TestMain(m *testing.M) {
 	if os.Getenv("DEPLOY_ENV") != "" {

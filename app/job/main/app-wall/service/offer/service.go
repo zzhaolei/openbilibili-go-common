@@ -11,7 +11,7 @@ import (
 	"go-common/app/job/main/app-wall/model/offer"
 	"go-common/library/log"
 
-	"github.com/Shopify/sarama"
+	"github.com/IBM/sarama"
 	cluster "github.com/bsm/sarama-cluster"
 )
 

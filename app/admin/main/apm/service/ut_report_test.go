@@ -2,11 +2,12 @@ package service
 
 import (
 	"context"
-	"go-common/app/admin/main/apm/dao"
 	"reflect"
 	"testing"
 
-	"github.com/bouk/monkey"
+	"go-common/app/admin/main/apm/dao"
+
+	"bou.ke/monkey"
 	"github.com/smartystreets/goconvey/convey"
 )
 
@@ -48,9 +49,7 @@ func TestServiceRankWechatReport(t *testing.T) {
 
 func TestServiceSummaryWechatReport(t *testing.T) {
 	convey.Convey("SummaryWechatReport", t, func(ctx convey.C) {
-		var (
-			c = context.Background()
-		)
+		c := context.Background()
 		ctx.Convey("When everything gose positive", func(ctx convey.C) {
 			guard := monkey.PatchInstanceMethod(reflect.TypeOf(svr.dao), "SendWechatToGroup", func(_ *dao.Dao, _ context.Context, _ string, _ string) error {
 				return nil

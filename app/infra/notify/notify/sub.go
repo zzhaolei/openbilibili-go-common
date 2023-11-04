@@ -19,7 +19,7 @@ import (
 	"go-common/library/net/netutil"
 	"go-common/library/stat/prom"
 
-	"github.com/Shopify/sarama"
+	"github.com/IBM/sarama"
 	cluster "github.com/bsm/sarama-cluster"
 	"github.com/rcrowley/go-metrics"
 )

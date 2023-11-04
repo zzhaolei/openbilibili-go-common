@@ -1,21 +1,23 @@
 package service
 
 import (
-	"go-common/app/service/main/upcredit/model/upcrmmodel"
+	"fmt"
+	"sync"
 	"time"
 
-	"fmt"
-	"github.com/jinzhu/gorm"
-	"github.com/pkg/errors"
-	"github.com/siddontang/go-mysql/mysql"
+	"go-common/app/service/main/upcredit/model/upcrmmodel"
+
 	"go-common/app/service/main/upcredit/conf"
 	"go-common/app/service/main/upcredit/dao/upcrmdao"
 	"go-common/app/service/main/upcredit/model/calculator"
 	"go-common/library/log"
-	"sync"
+
+	"github.com/go-mysql-org/go-mysql/mysql"
+	"github.com/jinzhu/gorm"
+	"github.com/pkg/errors"
 )
 
-//CalcService calc service
+// CalcService calc service
 type CalcService struct {
 	c             *conf.Config
 	JobChannel    chan BaseJobInterface
@@ -30,9 +32,9 @@ type CalcService struct {
 	crmdao        *upcrmdao.Dao
 }
 
-//NewCalc create calc service
+// NewCalc create calc service
 func NewCalc(c *conf.Config, outChan chan *upcrmmodel.UpScoreHistory, crmdao *upcrmdao.Dao) *CalcService {
-	var s = &CalcService{
+	s := &CalcService{
 		c:             c,
 		JobChannel:    make(chan BaseJobInterface, 100),
 		calc:          calculator.New(outChan),
@@ -45,13 +47,13 @@ func NewCalc(c *conf.Config, outChan chan *upcrmmodel.UpScoreHistory, crmdao *up
 	return s
 }
 
-//BaseJobInterface job interface
+// BaseJobInterface job interface
 type BaseJobInterface interface {
 	Run() (err error)
 	Description() string
 }
 
-//CalcJob calculate job
+// CalcJob calculate job
 type CalcJob struct {
 	ID int
 	// 数据日
@@ -63,7 +65,7 @@ type CalcJob struct {
 	Svc      *CalcService
 }
 
-//Run run job
+// Run run job
 func (job *CalcJob) Run() (err error) {
 	err = job.Svc.calc.CalcLogTable(job.TableNum, job.Date, job.Overall)
 	if err != nil {
@@ -76,12 +78,12 @@ func (job *CalcJob) Run() (err error) {
 	return
 }
 
-//Description descrpit job
+// Description descrpit job
 func (job *CalcJob) Description() (dest string) {
 	return fmt.Sprintf("calc table=%d, date=%s", job.TableNum, job.Date.Format(mysql.TimeFormat))
 }
 
-//CalcStatisticJob statis job
+// CalcStatisticJob statis job
 type CalcStatisticJob struct {
 	ID int
 	// 数据日
@@ -89,21 +91,21 @@ type CalcStatisticJob struct {
 	Svc  *CalcService
 }
 
-//Run run
+// Run run
 func (j *CalcStatisticJob) Run() (err error) {
 	return j.Svc.CalcScoreSectionData()
 }
 
-//Description desc
+// Description desc
 func (j *CalcStatisticJob) Description() (dest string) {
 	return fmt.Sprintf("calc statis, date=%s", j.Date.Format(mysql.TimeFormat))
 }
 
-//AddCalcJob add job
+// AddCalcJob add job
 func (c *CalcService) AddCalcJob(date time.Time) {
-	var count = upcrmmodel.CreditLogTableCount
+	count := upcrmmodel.CreditLogTableCount
 	for i := 0; i < count; i++ {
-		var job = &CalcJob{
+		job := &CalcJob{
 			ID:       c.getJobID(),
 			Date:     date,
 			TableNum: i,
@@ -123,7 +125,7 @@ func (c *CalcService) getJobID() int {
 	return c.jobID
 }
 
-//Run fun service
+// Run fun service
 func (c *CalcService) Run() {
 	go c.ScheduleJob()
 	go c.jobFinishCheck()
@@ -136,16 +138,16 @@ func (c *CalcService) Run() {
 	log.Info("run worker count=%d", c.c.RunStatJobConf.WorkerNumber)
 }
 
-//Close close service
+// Close close service
 func (c *CalcService) Close() {
 	c.isRunning = false
-	//c.wg.Wait()
+	// c.wg.Wait()
 }
 
-//ScheduleJob schedule job
+// ScheduleJob schedule job
 func (c *CalcService) ScheduleJob() {
-	var now = time.Now()
-	var startTime, err = time.Parse("15:04:05", c.c.RunStatJobConf.StartTime)
+	now := time.Now()
+	startTime, err := time.Parse("15:04:05", c.c.RunStatJobConf.StartTime)
 	if err != nil {
 		log.Error("schedule job start time error, config=%s, should like '12:00:00'")
 		startTime = time.Date(2000, 1, 1, 3, 0, 0, 0, now.Location())
@@ -178,7 +180,7 @@ func (c *CalcService) worker() {
 		}
 	}()
 	for job := range c.JobChannel {
-		var err = job.Run()
+		err := job.Run()
 		if err != nil {
 			log.Error("job run, err=%+v", err)
 		}
@@ -196,13 +198,14 @@ func (c *CalcService) jobFinishCheck() {
 func (c *CalcService) onAllJobFinish() {
 	log.Info("all job is done, add calc statistic job")
 
-	var job = &CalcStatisticJob{
+	job := &CalcStatisticJob{
 		ID:   c.getJobID(),
 		Date: time.Now().AddDate(0, 0, -1),
 		Svc:  c,
 	}
 	c.JobChannel <- job
 }
+
 func (c *CalcService) isAllJobFinish() bool {
 	c.mapLock.Lock()
 	defer c.mapLock.Unlock()
@@ -218,9 +221,9 @@ func (c *CalcService) isAllJobFinish() bool {
 	return true
 }
 
-//CalcScoreSectionData calc score section
+// CalcScoreSectionData calc score section
 func (c *CalcService) CalcScoreSectionData() (err error) {
-	var crmdb, e = gorm.Open("mysql", conf.Conf.DB.Upcrm.DSN)
+	crmdb, e := gorm.Open("mysql", conf.Conf.DB.Upcrm.DSN)
 	err = e
 	if e != nil {
 		log.Error("fail to open crm db, for score section")
@@ -228,12 +231,12 @@ func (c *CalcService) CalcScoreSectionData() (err error) {
 	}
 	log.Info("start calculate crm score section")
 	defer crmdb.Close()
-	var limit = 1000
-	var total = 0
-	var prSection = calculator.NewOverAllStatistic(1000, 10)
-	var qualitySection = calculator.NewOverAllStatistic(1000, 10)
-	var creditSection = calculator.NewOverAllStatistic(1000, 10)
-	var lastID = int32(0)
+	limit := 1000
+	total := 0
+	prSection := calculator.NewOverAllStatistic(1000, 10)
+	qualitySection := calculator.NewOverAllStatistic(1000, 10)
+	creditSection := calculator.NewOverAllStatistic(1000, 10)
+	lastID := int32(0)
 
 	for {
 		var upInfos []upcrmmodel.UpBaseInfo
@@ -252,7 +255,7 @@ func (c *CalcService) CalcScoreSectionData() (err error) {
 			lastID = u.ID
 		}
 
-		var thisCount = len(upInfos)
+		thisCount := len(upInfos)
 		total += thisCount
 		if thisCount < limit {
 			log.Info("table[up_base_info] total read record, num=%d", total)
@@ -260,7 +263,7 @@ func (c *CalcService) CalcScoreSectionData() (err error) {
 		}
 	}
 	// 输出到score表中
-	var now = time.Now()
+	now := time.Now()
 	err = c.crmdao.InsertScoreSection(*prSection, upcrmmodel.ScoreTypePr, now)
 	if err != nil {
 		log.Error("fail update pr score section, err=%+v", err)
